@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Description of Attribute
+ * Description of Skill
  *
  * @author kuba
  */
-class Attribute
+class Skill
 {
 
 	private $id;
 	private $name;
-	private $description;
+	private $value;
 
 	public function getId()
 	{
@@ -32,14 +32,14 @@ class Attribute
 		$this->name = $name;
 	}
 
-	public function getDescription()
+	public function getValue()
 	{
-		return $this->description;
+		return $this->value;
 	}
 
-	public function setDescription($description)
+	public function setValue($value)
 	{
-		$this->description = $description;
+		$this->value = $value;
 	}
 
 }

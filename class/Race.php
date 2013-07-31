@@ -1,17 +1,14 @@
 <?php
-
 /**
- * Description of Attribute
+ * Description of Race
  *
  * @author kuba
  */
-class Attribute
+class Race
 {
-
 	private $id;
 	private $name;
-	private $description;
-
+	
 	public function getId()
 	{
 		return $this->id;
@@ -30,16 +27,6 @@ class Attribute
 	public function setName($name)
 	{
 		$this->name = $name;
-	}
-
-	public function getDescription()
-	{
-		return $this->description;
-	}
-
-	public function setDescription($description)
-	{
-		$this->description = $description;
 	}
 
 }

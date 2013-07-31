@@ -1,17 +1,16 @@
 <?php
 
 /**
- * Description of Attribute
+ * Description of Hindrance
  *
  * @author kuba
  */
-class Attribute
+class Hindrance
 {
-
 	private $id;
 	private $name;
 	private $description;
-
+	
 	public function getId()
 	{
 		return $this->id;

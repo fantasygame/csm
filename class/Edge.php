@@ -1,17 +1,16 @@
 <?php
 
 /**
- * Description of Attribute
+ * Description of Edge
  *
  * @author kuba
  */
-class Attribute
+class Edge
 {
-
 	private $id;
 	private $name;
 	private $description;
-
+	
 	public function getId()
 	{
 		return $this->id;
