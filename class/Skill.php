@@ -11,7 +11,35 @@ class Skill
 	private $id;
 	private $name;
 	private $value;
+	private $attribute;
+	
+	public function __construct($id, $name, $value, $attribute)
+	{
+		$this->id = $id;
+		$this->name = $name;
+		$this->value = $value;
+		$this->attribute = $attribute;
+	}
 
+	
+
+
+
+
+
+
+
+	public function getAttribute()
+	{
+		return $this->attribute;
+	}
+
+	public function setAttribute($attribute)
+	{
+		$this->attribute = $attribute;
+	}
+
+	
 	public function getId()
 	{
 		return $this->id;
