@@ -11,6 +11,15 @@ class Attribute
 	private $id;
 	private $name;
 	private $description;
+	private $value;
+	
+	public function __construct($id, $name, $description, $value)
+	{
+		$this->id = $id;
+		$this->description = $description;
+		$this->name = $name;
+		$this->value = $value;
+	}
 
 	public function getId()
 	{
@@ -40,6 +49,16 @@ class Attribute
 	public function setDescription($description)
 	{
 		$this->description = $description;
+	}
+	
+	public function getValue()
+	{
+		return $this->value;
+	}
+
+	public function setValue($value)
+	{
+		$this->value = $value;
 	}
 
 }
