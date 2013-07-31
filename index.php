@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        
-        require './MySql.php';
+<?php
 
-        $mysql = new MySql('localhost', 'root', 'okurwakacper', 'csm');
+require 'class/Attribute.php';
 
-        $query = "
-           SELECT * FROM `attribute`
-        ";
+$strength = new Attribute();
 
-        $result = $mysql->select($query);
-        
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
-        
-        ?>
-    </body>
-</html>
+$strength->setId(1);
+$strength->setName('Siła');
+$strength->setDescription('Naklatanoxa zapytaj');
+
+echo 'Ten atrybut to ';
+echo $strength->getName();
+
+?>
