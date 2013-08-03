@@ -19,6 +19,7 @@ class Sheet
 	private $hindrances;
 	private $skills;
 	private $attributes;
+	private $powers;
 	
 	public function getId()
 	{
@@ -139,7 +140,17 @@ class Sheet
 	{
 		$this->attributes = $attributes;
 	}
-	
+	public function getPowers()
+	{
+		return $this->powers;
+	}
+
+	public function setPowers($powers)
+	{
+		$this->powers = $powers;
+	}
+
+
 }
 
 ?>

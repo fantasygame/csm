@@ -50,6 +50,26 @@ class SheetRepository
 		for ($i = 0; $i < count($hindrances); $i++) {
 			$hindranceRepository->persist($hindrances[$i], $sheet);
 		}
+		$edgeRepository = new EdgeRepository($this->mysql);
+
+		$edges = $sheet->getEdges();
+
+		for ($i = 0; $i < count($edges); $i++) {
+			$edgeRepository->persist($edges[$i], $sheet);
+		}
+		
+		$skills = $sheet->getSkills();
+		$skillRepository = new SkillRepository($this->mysql);
+		
+		for ($i = 0; $i < count($skills); $i++) {
+			$skillRepository->persist($skills[$i], $sheet);
+		}
+		$powers = $sheet->getPowers() ;
+		$powerRepository = new PowerRepository($this->mysql);
+		for ($i = 0; $i < count($powers); $i++) {
+			$powerRepository->persist($powers[$i], $sheet);
+		
+		}
 	}
 
 	public function create($id)
@@ -78,14 +98,16 @@ class SheetRepository
 		$attributes[] = $spirit;
 		$attributes[] = $smarts;
 		$nakl->setAttributes($attributes);
-
+		
+		$edges = array();
 		$edges[] = new Edge(1, 'Odporny', 'No kurwa odporny');
 		$edges[] = new Edge(2, 'Berserker', 'No kurwa');
 		$edges[] = new Edge(3, 'Dzikie prącie', 'Bulbasaur, atak dzikim prąciem!');
 
 
 		$nakl->setEdges($edges);
-
+		
+		$hindrances = array();
 		$hindrances[] = new Hindrance(1, 'Chojrak', 'No kurwa chojrak');
 		$hindrances[] = new Hindrance(2, 'Grubas', 'No kurwa grubas');
 		$hindrances[] = new Hindrance(3, 'Tepy chuj', 'Ale panie kapitanie...');
@@ -100,7 +122,16 @@ class SheetRepository
 		$nakl->setSkills($skills);
 
 		$race = new Race(1, 'człowiek');
-
+		
+		$powers = array();
+		
+		$powers[] = new Power(1, 'koń', 'z ogonkiem');
+		$powers[] = new Power(2, 'pies', 'z uszami');
+		$powers[] = new Power(3, 'rozpierdalacz', 'z broniom');
+		
+		$nakl->setPowers($powers);
+				
+				
 		$nakl->setRace($race);
 		$nakl->setId(1);
 		$nakl->setName('Naklatanox');

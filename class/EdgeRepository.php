@@ -5,7 +5,7 @@
  *
  * @author 
  */
-class HindranceRepository
+class EdgeRepository
 {
 	/* @var $mysql MySql */
 
@@ -16,18 +16,18 @@ class HindranceRepository
 		$this->mysql = $mysql;
 	}
 
-	public function persist(Hindrance $hindrance, Sheet $sheet)
+	public function persist(Edge $edge, Sheet $sheet)
 	{
 		$query = "
-		INSERT INTO `sheet_hindrance` (
+		INSERT INTO `sheet_edge` (
 			`id` ,
 			`sheet_id` ,
-			`hindrance_id`			
+			`edge_id`			
 		)
 		VALUES (
 			NULL,
 			'{$sheet->getId()}',
-			'{$hindrance->getId()}'
+			'{$edge->getId()}'
 		);
 		";
 
