@@ -12,6 +12,7 @@
  */
 class SkillRepository
 {
+
 	private $mysql;
 
 	public function __construct(MySql $mysql)
@@ -19,7 +20,7 @@ class SkillRepository
 		$this->mysql = $mysql;
 	}
 
-	public function persist(Skill $skill, Sheet $sheet)
+	public function persistRelation(Skill $skill, Sheet $sheet)
 	{
 		$query = "
 		INSERT INTO `sheet_skill` (
@@ -38,7 +39,6 @@ class SkillRepository
 
 		$this->mysql->query($query);
 	}
-
 
 }
 

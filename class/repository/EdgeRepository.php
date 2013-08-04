@@ -16,7 +16,7 @@ class EdgeRepository
 		$this->mysql = $mysql;
 	}
 
-	public function persist(Edge $edge, Sheet $sheet)
+	public function persistRelation(Edge $edge, Sheet $sheet)
 	{
 		$query = "
 		INSERT INTO `sheet_edge` (

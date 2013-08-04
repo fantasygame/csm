@@ -16,7 +16,7 @@ class HindranceRepository
 		$this->mysql = $mysql;
 	}
 
-	public function persist(Hindrance $hindrance, Sheet $sheet)
+	public function persistRelation(Hindrance $hindrance, Sheet $sheet)
 	{
 		$query = "
 		INSERT INTO `sheet_hindrance` (

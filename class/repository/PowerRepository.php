@@ -1,13 +1,14 @@
 <?php
 
-
 class PowerRepository
 {
+
 	public function __construct(MySql $mysql)
 	{
 		$this->mysql = $mysql;
 	}
-		public function persist(Power $power, Sheet $sheet)
+
+	public function persistRelation(Power $power, Sheet $sheet)
 	{
 		$query = "
 		INSERT INTO `sheet_power` (
@@ -24,6 +25,7 @@ class PowerRepository
 
 		$this->mysql->query($query);
 	}
+
 }
 
 ?>
