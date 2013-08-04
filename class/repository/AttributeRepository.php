@@ -19,20 +19,20 @@ class AttributeRepository
 	public function persistRelation(Attribute $attribute, Sheet $sheet)
 	{
 		$query = "
-		INSERT INTO `sheet_power` (
+		INSERT INTO `sheet_attribute` (
 			`id` ,
 			`sheet_id` ,
-			`power_id`			
+			`attribute_id`			
 		)
 		VALUES (
 			NULL,
 			:sheet_id ,
-			:power_id
+			:attribute_id
 		);
 		";
 		$handle = $this->db->prepare($query);
 		$handle->bindParam(':sheet_id', $sheet->getId(), PDO::PARAM_INT);
-		$handle->bindParam(':power_id', $attribute->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':attribute_id', $attribute->getId(), PDO::PARAM_INT);
 		$handle->execute();
 	}
 

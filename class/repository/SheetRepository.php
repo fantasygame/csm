@@ -66,6 +66,7 @@ class SheetRepository
 		$this->persistEdges($sheet);
 		$this->persistSkills($sheet);
 		$this->persistPowers($sheet);
+		$this->persistAttributes($sheet);
 	}
 
 	private function persistHindrances(Sheet $sheet)
@@ -101,6 +102,15 @@ class SheetRepository
 		$powerRepository = new PowerRepository($this->db);
 		for ($i = 0; $i < count($powers); $i++) {
 			$powerRepository->persistRelation($powers[$i], $sheet);
+		}
+	}
+	
+	private function persistAttributes(Sheet $sheet)
+	{
+		$attributes = $sheet->getAttributes();
+		$attributeRepository = new AttributeRepository($this->db);
+		for ($i = 0; $i < count($attributes); $i++) {
+			$attributeRepository->persistRelation($attributes[$i], $sheet);
 		}
 	}
 
