@@ -18,6 +18,7 @@ class SheetRepository
 
 	public function persist(Sheet $sheet)
 	{
+		$this->db->beginTransaction();
 		$query = "
 		INSERT INTO `sheet` (
 			`id` ,
@@ -52,6 +53,7 @@ class SheetRepository
 
 		$handle->execute();
 		$this->persistRelations($sheet);
+		$this->db->commit();
 	}
 
 	public function create($id)
