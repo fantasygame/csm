@@ -1,4 +1,5 @@
 <?php
+
 require './autoload.php';
 $mysql = new MySql('localhost', 'root', 'okurwakacper', 'csm');
 
