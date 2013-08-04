@@ -1,11 +1,20 @@
 <?php
 
 require './autoload.php';
-$mysql = new MySql('localhost', 'root', 'okurwakacper', 'csm');
+$db = new Database('localhost', 'root', 'okurwakacper', 'mysql', 'csm');
 
-$sheetRepository = new SheetRepository($mysql);
-$sheet = $sheetRepository->gimmeNaklatanox('ROAAAAAAR!');
+$sheetRepository = new SheetRepository($db);
+$sheet = $sheetRepository->gimmeNaklatanox();
 
+try {
 $sheetRepository->persist($sheet);
+} catch (Exception $e) {
+	echo '<pre>';
+	echo $e->getMessage();
+	echo '</pre>';
+	echo '<pre>';
+	print_r($e->getTrace());
+	echo '</pre>';
+}
 
 ?>

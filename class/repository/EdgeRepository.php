@@ -7,13 +7,13 @@
  */
 class EdgeRepository
 {
-	/* @var $mysql MySql */
+	/* @var $db Database */
 
-	private $mysql;
+	private $db;
 
-	public function __construct(MySql $mysql)
+	public function __construct(Database $db)
 	{
-		$this->mysql = $mysql;
+		$this->db = $db;
 	}
 
 	public function persistRelation(Edge $edge, Sheet $sheet)
@@ -26,12 +26,14 @@ class EdgeRepository
 		)
 		VALUES (
 			NULL,
-			'{$sheet->getId()}',
-			'{$edge->getId()}'
+			:sheet_id ,
+			:edge_id	
 		);
 		";
 
-		$this->mysql->query($query);
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':sheet_id', $sheet->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':edge_id', $edge->getId(), PDO::PARAM_INT);
 	}
 
 }

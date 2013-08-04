@@ -7,13 +7,13 @@
  */
 class SheetRepository
 {
-	/* @var $mysql MySql */
+	/* @var $db Database */
 
-	private $mysql;
+	private $db;
 
-	public function __construct(MySql $mysql)
+	public function __construct(Database $db)
 	{
-		$this->mysql = $mysql;
+		$this->db = $db;
 	}
 
 	public function persist(Sheet $sheet)
@@ -30,45 +30,28 @@ class SheetRepository
 			`exp`
 		)
 		VALUES (
-			NULL,
-			'{$sheet->getUser()->getId()}',
-			'{$sheet->getName()}',
-			'{$sheet->getRace()->getId()}',
-			'{$sheet->getAppearance()}',
-			'{$sheet->getArchetype()}',
-			'{$sheet->getDescription()}',
-			'{$sheet->getExp()}'
+			NULL ,
+			:user_id ,
+			:name ,
+			:race_id ,
+			:appearance ,
+			:archetype ,
+			:description ,
+			:exp
 		);
 		";
 
-		$this->mysql->query($query);
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':user_id', $sheet->getUser()->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':name', $sheet->getName(), PDO::PARAM_STR);
+		$handle->bindParam(':race_id', $sheet->getRace()->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':appearance', $sheet->getAppearance(), PDO::PARAM_STR);
+		$handle->bindParam(':archetype', $sheet->getArchetype(), PDO::PARAM_STR);
+		$handle->bindParam(':description', $sheet->getDescription(), PDO::PARAM_STR);
+		$handle->bindParam(':exp', $sheet->getExp(), PDO::PARAM_STR);
 
-		$hindranceRepository = new HindranceRepository($this->mysql);
-
-		$hindrances = $sheet->getHindrances();
-
-		for ($i = 0; $i < count($hindrances); $i++) {
-			$hindranceRepository->persistRelation($hindrances[$i], $sheet);
-		}
-		$edgeRepository = new EdgeRepository($this->mysql);
-
-		$edges = $sheet->getEdges();
-
-		for ($i = 0; $i < count($edges); $i++) {
-			$edgeRepository->persistRelation($edges[$i], $sheet);
-		}
-
-		$skills = $sheet->getSkills();
-		$skillRepository = new SkillRepository($this->mysql);
-
-		for ($i = 0; $i < count($skills); $i++) {
-			$skillRepository->persistRelation($skills[$i], $sheet);
-		}
-		$powers = $sheet->getPowers();
-		$powerRepository = new PowerRepository($this->mysql);
-		for ($i = 0; $i < count($powers); $i++) {
-			$powerRepository->persistRelation($powers[$i], $sheet);
-		}
+		$handle->execute();
+		$this->persistRelations($sheet);
 	}
 
 	public function create($id)
@@ -77,12 +60,56 @@ class SheetRepository
 		return $sheet;
 	}
 
-	public function gimmeNaklatanox($roar)
+	private function persistRelations(Sheet $sheet)
 	{
-		echo "<p>$roar</p>";
+		$this->persistHindrances($sheet);
+		$this->persistEdges($sheet);
+		$this->persistSkills($sheet);
+		$this->persistPowers($sheet);
+	}
+
+	private function persistHindrances(Sheet $sheet)
+	{
+		$hindrances = $sheet->getHindrances();
+		$hindranceRepository = new HindranceRepository($this->db);
+		for ($i = 0; $i < count($hindrances); $i++) {
+			$hindranceRepository->persistRelation($hindrances[$i], $sheet);
+		}
+	}
+
+	private function persistEdges(Sheet $sheet)
+	{
+		$edges = $sheet->getEdges();
+		$edgeRepository = new EdgeRepository($this->db);
+		for ($i = 0; $i < count($edges); $i++) {
+			$edgeRepository->persistRelation($edges[$i], $sheet);
+		}
+	}
+
+	private function persistSkills(Sheet $sheet)
+	{
+		$skills = $sheet->getSkills();
+		$skillRepository = new SkillRepository($this->db);
+		for ($i = 0; $i < count($skills); $i++) {
+			$skillRepository->persistRelation($skills[$i], $sheet);
+		}
+	}
+
+	private function persistPowers(Sheet $sheet)
+	{
+		$powers = $sheet->getPowers();
+		$powerRepository = new PowerRepository($this->db);
+		for ($i = 0; $i < count($powers); $i++) {
+			$powerRepository->persistRelation($powers[$i], $sheet);
+		}
+	}
+
+	public function gimmeNaklatanox()
+	{
 		$nakl = new Sheet();
 		$nakl->setAppearance('Koks');
 		$nakl->setArchetype('Press R to win');
+		$nakl->setExp(60);
 
 		$attributes = array();
 

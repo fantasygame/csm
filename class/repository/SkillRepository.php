@@ -12,12 +12,13 @@
  */
 class SkillRepository
 {
+	/* @var $db Database */
 
-	private $mysql;
+	private $db;
 
-	public function __construct(MySql $mysql)
+	public function __construct(Database $db)
 	{
-		$this->mysql = $mysql;
+		$this->db = $db;
 	}
 
 	public function persistRelation(Skill $skill, Sheet $sheet)
@@ -31,13 +32,17 @@ class SkillRepository
 		)
 		VALUES (
 			NULL,
-			'{$sheet->getId()}',
-			'{$skill->getId()}',
-			'{$skill->getValue()}'
+			:sheet_id ,
+			:skill_id,
+			:value
 		);
 		";
 
-		$this->mysql->query($query);
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':sheet_id', $sheet->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':skill_id', $skill->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':value', $skill->getValue(), PDO::PARAM_INT);
+		$handle->execute();
 	}
 
 }

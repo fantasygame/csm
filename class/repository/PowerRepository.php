@@ -2,10 +2,13 @@
 
 class PowerRepository
 {
+	/* @var $db Database */
 
-	public function __construct(MySql $mysql)
+	private $db;
+
+	public function __construct(Database $db)
 	{
-		$this->mysql = $mysql;
+		$this->db = $db;
 	}
 
 	public function persistRelation(Power $power, Sheet $sheet)
@@ -18,12 +21,14 @@ class PowerRepository
 		)
 		VALUES (
 			NULL,
-			'{$sheet->getId()}',
-			'{$power->getId()}'
+			:sheet_id ,
+			:power_id
 		);
 		";
-
-		$this->mysql->query($query);
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':sheet_id', $sheet->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':power_id', $power->getId(), PDO::PARAM_INT);
+		$handle->execute();
 	}
 
 }
