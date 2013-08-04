@@ -41,7 +41,7 @@ class SheetRepository
 			:exp
 		);
 		";
-
+		
 		$handle = $this->db->prepare($query);
 		$handle->bindParam(':user_id', $sheet->getUser()->getId(), PDO::PARAM_INT);
 		$handle->bindParam(':name', $sheet->getName(), PDO::PARAM_STR);
@@ -106,7 +106,7 @@ class SheetRepository
 			$powerRepository->persistRelation($powers[$i], $sheet);
 		}
 	}
-	
+
 	private function persistAttributes(Sheet $sheet)
 	{
 		$attributes = $sheet->getAttributes();
@@ -142,14 +142,12 @@ class SheetRepository
 		$edges[] = new Edge(2, 'Berserker', 'No kurwa');
 		$edges[] = new Edge(3, 'Dzikie prącie', 'Bulbasaur, atak dzikim prąciem!');
 
-
 		$nakl->setEdges($edges);
 
 		$hindrances = array();
 		$hindrances[] = new Hindrance(1, 'Chojrak', 'No kurwa chojrak');
 		$hindrances[] = new Hindrance(2, 'Grubas', 'No kurwa grubas');
 		$hindrances[] = new Hindrance(3, 'Tepy chuj', 'Ale panie kapitanie...');
-
 
 		$nakl->setHindrances($hindrances);
 
@@ -162,13 +160,11 @@ class SheetRepository
 		$race = new Race(1, 'człowiek');
 
 		$powers = array();
-
 		$powers[] = new Power(1, 'koń', 'z ogonkiem');
 		$powers[] = new Power(2, 'pies', 'z uszami');
 		$powers[] = new Power(3, 'rozpierdalacz', 'z broniom');
 
 		$nakl->setPowers($powers);
-
 
 		$nakl->setRace($race);
 		$nakl->setId(1);
