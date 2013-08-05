@@ -5,7 +5,8 @@ function __autoload($class_name)
 	$directories = array(
 		'./class/',
 		'./class/entity/',
-		'./class/repository/'
+		'./class/repository/',
+		'./class/lib/'
 	);
 	foreach ($directories as $directory) {
 		if (file_exists($directory . $class_name . '.php')) {
