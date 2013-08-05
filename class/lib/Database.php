@@ -1,13 +1,21 @@
 <?php
 
 /**
- * Description of MySql
+ * Database tool
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class Database extends PDO
 {
 
+	/**
+	 * 
+	 * @param string $host host
+	 * @param string $user username
+	 * @param string $password password
+	 * @param string $engine database engine (mysql default)
+	 * @param string $database database name
+	 */
 	public function __construct($host, $user, $password, $engine = 'mysql', $database = null)
 	{
 		$options = array(

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of HindranceRepository
+ * Database methods for Edge
  *
- * @author 
+ * @author PHP Summer Workshop
  */
 class EdgeRepository
 {
@@ -16,6 +16,11 @@ class EdgeRepository
 		$this->db = $db;
 	}
 
+	/**
+	 * Persists relation between Attribute and Edge
+	 * @param Edge $edge
+	 * @param Sheet $sheet
+	 */
 	public function persistRelation(Edge $edge, Sheet $sheet)
 	{
 		$query = "

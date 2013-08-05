@@ -1,16 +1,27 @@
 <?php
 
+/**
+ * Database methods for Power
+ *
+ * @author PHP Summer Workshop
+ */
 class PowerRepository
 {
 	/* @var $db Database */
 
 	private $db;
 
+	
 	public function __construct(Database $db)
 	{
 		$this->db = $db;
 	}
 
+	/**
+	 * Persists relation between Attribute and Sheet
+	 * @param Power $power
+	 * @param Sheet $sheet
+	 */
 	public function persistRelation(Power $power, Sheet $sheet)
 	{
 		$query = "

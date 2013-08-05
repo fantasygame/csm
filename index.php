@@ -1,13 +1,21 @@
 <?php
 
+// autoload unloaded Class
 require './autoload.php';
+
+// connect to database
 $db = new Database('localhost', 'root', 'okurwakacper', 'mysql', 'csm');
 
+// create repository to manage Sheet in database
 $sheetRepository = new SheetRepository($db);
+
+// create sample Sheet
 $sheet = $sheetRepository->gimmeNaklatanox();
 
+// persist Sheet in database (catching errors)
+// persist method uses transaction http://en.wikipedia.org/wiki/Database_transaction
 try {
-$sheetRepository->persist($sheet);
+	$sheetRepository->persist($sheet);
 } catch (Exception $e) {
 	echo '<pre>';
 	echo $e->getMessage();
@@ -16,5 +24,4 @@ $sheetRepository->persist($sheet);
 	print_r($e->getTrace());
 	echo '</pre>';
 }
-
 ?>

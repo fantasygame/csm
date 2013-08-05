@@ -1,12 +1,13 @@
 <?php
 
 /**
- * Description of Sheet
+ * Sheet
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class Sheet
 {
+
 	private $id;
 	private $user;
 	private $name;
@@ -20,7 +21,7 @@ class Sheet
 	private $skills;
 	private $attributes;
 	private $powers;
-	
+
 	public function getId()
 	{
 		return $this->id;
@@ -140,6 +141,7 @@ class Sheet
 	{
 		$this->attributes = $attributes;
 	}
+
 	public function getPowers()
 	{
 		return $this->powers;
@@ -149,7 +151,6 @@ class Sheet
 	{
 		$this->powers = $powers;
 	}
-
 
 }
 

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of Manager
+ * Database methods for Sheet
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class SheetRepository
 {
@@ -16,6 +16,10 @@ class SheetRepository
 		$this->db = $db;
 	}
 
+	/**
+	 * Persists Sheet in database
+	 * @param Sheet $sheet
+	 */
 	public function persist(Sheet $sheet)
 	{
 		$this->db->beginTransaction();
@@ -41,7 +45,7 @@ class SheetRepository
 			:exp
 		);
 		";
-		
+
 		$handle = $this->db->prepare($query);
 		$handle->bindParam(':user_id', $sheet->getUser()->getId(), PDO::PARAM_INT);
 		$handle->bindParam(':name', $sheet->getName(), PDO::PARAM_STR);
@@ -56,12 +60,21 @@ class SheetRepository
 		$this->db->commit();
 	}
 
+	/**
+	 * Creates Sheet from database
+	 * @param type $id
+	 * @return Sheet
+	 */
 	public function create($id)
 	{
 		$sheet = new Sheet();
 		return $sheet;
 	}
 
+	/**
+	 * Persists Sheet relations
+	 * @param Sheet $sheet
+	 */
 	private function persistRelations(Sheet $sheet)
 	{
 		$this->persistHindrances($sheet);
@@ -71,6 +84,10 @@ class SheetRepository
 		$this->persistAttributes($sheet);
 	}
 
+	/**
+	 * Persists Hindrance relations
+	 * @param Sheet $sheet
+	 */
 	private function persistHindrances(Sheet $sheet)
 	{
 		$hindrances = $sheet->getHindrances();
@@ -80,6 +97,10 @@ class SheetRepository
 		}
 	}
 
+	/**
+	 * Persists Edge relations
+	 * @param Sheet $sheet
+	 */
 	private function persistEdges(Sheet $sheet)
 	{
 		$edges = $sheet->getEdges();
@@ -89,6 +110,10 @@ class SheetRepository
 		}
 	}
 
+	/**
+	 * Persists Skill relations
+	 * @param Sheet $sheet
+	 */
 	private function persistSkills(Sheet $sheet)
 	{
 		$skills = $sheet->getSkills();
@@ -98,6 +123,10 @@ class SheetRepository
 		}
 	}
 
+	/**
+	 * Persists Power relations
+	 * @param Sheet $sheet
+	 */
 	private function persistPowers(Sheet $sheet)
 	{
 		$powers = $sheet->getPowers();
@@ -107,6 +136,10 @@ class SheetRepository
 		}
 	}
 
+	/**
+	 * Persists Attribute relations
+	 * @param Sheet $sheet
+	 */
 	private function persistAttributes(Sheet $sheet)
 	{
 		$attributes = $sheet->getAttributes();
@@ -116,6 +149,11 @@ class SheetRepository
 		}
 	}
 
+	/**
+	 * Creates sample Sheet object (Naklatanox)
+	 * @param Sheet $sheet
+	 * @return Sheet
+	 */
 	public function gimmeNaklatanox()
 	{
 		$nakl = new Sheet();

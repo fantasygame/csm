@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of Edge
+ * Edge
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class Edge
 {

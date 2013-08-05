@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of HindranceRepository
+ * Database methods for Hindrance
  *
- * @author 
+ * @author PHP Summer Workshop
  */
 class HindranceRepository
 {
@@ -15,7 +15,12 @@ class HindranceRepository
 	{
 		$this->db = $db;
 	}
-
+	
+	/**
+	 * Persists relation between Attribute and Hindrance
+	 * @param Hindrance $hindrance
+	 * @param Sheet $sheet
+	 */
 	public function persistRelation(Hindrance $hindrance, Sheet $sheet)
 	{
 		$query = "

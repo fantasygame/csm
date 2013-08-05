@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of User
+ * User
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class User
 {

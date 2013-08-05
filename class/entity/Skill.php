@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of Skill
+ * Skill
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class Skill
 {
@@ -12,7 +12,7 @@ class Skill
 	private $name;
 	private $value;
 	private $attribute;
-	
+
 	public function __construct($id, $name, $value, $attribute)
 	{
 		$this->id = $id;
@@ -20,14 +20,6 @@ class Skill
 		$this->value = $value;
 		$this->attribute = $attribute;
 	}
-
-	
-
-
-
-
-
-
 
 	public function getAttribute()
 	{
@@ -39,7 +31,6 @@ class Skill
 		$this->attribute = $attribute;
 	}
 
-	
 	public function getId()
 	{
 		return $this->id;

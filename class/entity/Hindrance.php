@@ -1,16 +1,17 @@
 <?php
 
 /**
- * Description of Hindrance
+ * Hindrance
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class Hindrance
 {
+
 	private $id;
 	private $name;
 	private $description;
-	
+
 	public function __construct($id, $name, $description)
 	{
 		$this->id = $id;
@@ -18,7 +19,7 @@ class Hindrance
 		$this->description = $description;
 	}
 
-		public function getId()
+	public function getId()
 	{
 		return $this->id;
 	}

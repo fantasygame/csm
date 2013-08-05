@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Description of Power
+ * Power
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class Power
 {
+
 	private $id;
 	private $name;
 	private $description;
-	
-	
+
 	public function __construct($id, $name, $description)
 	{
 		$this->id = $id;
@@ -19,7 +19,7 @@ class Power
 		$this->description = $description;
 	}
 
-		public function getId()
+	public function getId()
 	{
 		return $this->id;
 	}

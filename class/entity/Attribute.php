@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of Attribute
+ * Attribute
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class Attribute
 {

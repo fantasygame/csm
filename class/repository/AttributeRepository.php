@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Description of AttributeRepository
+ * Database methods for Attribute
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class AttributeRepository
 {
@@ -16,6 +16,11 @@ class AttributeRepository
 		$this->db = $db;
 	}
 
+	/**
+	 * Persists relation between Attribute and Sheet
+	 * @param Attribute $attribute
+	 * @param Sheet $sheet
+	 */
 	public function persistRelation(Attribute $attribute, Sheet $sheet)
 	{
 		$query = "

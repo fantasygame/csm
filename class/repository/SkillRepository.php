@@ -1,14 +1,9 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of SkillRepository
+ * Database methods for Skill
  *
- * @author kuba
+ * @author PHP Summer Workshop
  */
 class SkillRepository
 {
