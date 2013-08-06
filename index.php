@@ -7,6 +7,14 @@ spl_autoload_register('autoload');
 // connect to database
 $db = new Database('localhost', 'root', 'okurwakacper', 'mysql', 'csm');
 
+
+$attributeRepository = new AttributeRepository($db);
+
+$attributeRepository->getAll();
+
+
+
+exit();
 // create repository to manage Sheet in database
 $sheetRepository = new SheetRepository($db);
 

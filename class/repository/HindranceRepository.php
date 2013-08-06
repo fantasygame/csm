@@ -15,7 +15,7 @@ class HindranceRepository
 	{
 		$this->db = $db;
 	}
-	
+
 	/**
 	 * Persists relation between Attribute and Hindrance
 	 * @param Hindrance $hindrance
@@ -40,6 +40,26 @@ class HindranceRepository
 		$handle->bindParam(':sheet_id', $sheet->getId(), PDO::PARAM_INT);
 		$handle->bindParam(':hindrance_id', $hindrance->getId(), PDO::PARAM_INT);
 		$handle->execute();
+	}
+
+	public function getAll()
+	{
+
+		$query = "
+			SELECT * FROM `hindrance`
+			";
+
+		$handle = $this->db->query($query);
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+
+		$hindrances = array();
+
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$hindrance = new Hindrance($res['id'], $res['name'], $res['description']);
+			$hindrances[] = $hindrance;
+		}
+		return $hindrances;
 	}
 
 }

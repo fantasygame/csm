@@ -23,6 +23,7 @@ class SheetRepository
 	public function persist(Sheet $sheet)
 	{
 		$this->db->beginTransaction();
+		
 		$query = "
 		INSERT INTO `sheet` (
 			`id` ,
@@ -47,16 +48,18 @@ class SheetRepository
 		";
 
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(':user_id', $sheet->getUser()->getId(), PDO::PARAM_INT);
-		$handle->bindParam(':name', $sheet->getName(), PDO::PARAM_STR);
-		$handle->bindParam(':race_id', $sheet->getRace()->getId(), PDO::PARAM_INT);
-		$handle->bindParam(':appearance', $sheet->getAppearance(), PDO::PARAM_STR);
-		$handle->bindParam(':archetype', $sheet->getArchetype(), PDO::PARAM_STR);
-		$handle->bindParam(':description', $sheet->getDescription(), PDO::PARAM_STR);
-		$handle->bindParam(':exp', $sheet->getExp(), PDO::PARAM_STR);
-
+		$handle->bindParam(':user_id', $sheet->getUser()->getId(), Database::PARAM_INT);
+		$handle->bindParam(':name', $sheet->getName(), Database::PARAM_STR);
+		$handle->bindParam(':race_id', $sheet->getRace()->getId(), Database::PARAM_INT);
+		$handle->bindParam(':appearance', $sheet->getAppearance(), Database::PARAM_STR);
+		$handle->bindParam(':archetype', $sheet->getArchetype(), Database::PARAM_STR);
+		$handle->bindParam(':description', $sheet->getDescription(), Database::PARAM_STR);
+		$handle->bindParam(':exp', $sheet->getExp(), Database::PARAM_STR);
 		$handle->execute();
+		
 		$this->persistRelations($sheet);
+		
+		// Commits transaction
 		$this->db->commit();
 	}
 

@@ -41,6 +41,30 @@ class EdgeRepository
 		$handle->bindParam(':edge_id', $edge->getId(), PDO::PARAM_INT);
 	}
 
+	/**
+	 * Get all the Edges !!!
+	 * @return array of Edges
+	 */
+	public function getAll()
+	{
+		$query = "
+		SELECT * FROM `edge`
+		";
+
+		$handle = $this->db->query($query);
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+
+		$edges = array();
+
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$edge = new Edge($res['id'], $res['name'], $res['description']);
+			$edges[] = $edge;
+		}
+
+		return $edges;
+	}
+
 }
 
 ?>
