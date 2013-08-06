@@ -1,6 +1,6 @@
 <?php
 
-function __autoload($class_name)
+function autoload($class_name)
 {
 	$directories = array(
 		'./class/',

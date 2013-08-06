@@ -2,6 +2,7 @@
 
 // autoload unloaded Class
 require './autoload.php';
+spl_autoload_register('autoload');
 
 // connect to database
 $db = new Database('localhost', 'root', 'okurwakacper', 'mysql', 'csm');
