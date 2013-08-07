@@ -13,7 +13,6 @@ $attributeRepository = new AttributeRepository($db);
 $attributeRepository->getAll();
 
 
-
 exit();
 // create repository to manage Sheet in database
 $sheetRepository = new SheetRepository($db);
