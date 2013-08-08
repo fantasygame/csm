@@ -1,56 +1,21 @@
 <?php
 
 /**
- * Attribute
+ * Description of SheetAttribute
  *
- * @author PHP Summer Workshop
+ * @author kuba
  */
-class Attribute
+class Attribute extends BaseAttribute
 {
 
-	private $id;
-	private $name;
-	private $description;
 	private $value;
-	
+
 	public function __construct($id, $name, $description, $value)
 	{
-		$this->id = $id;
-		$this->description = $description;
-		$this->name = $name;
+		parent::__construct($id, $name, $description);
 		$this->value = $value;
 	}
 
-	public function getId()
-	{
-		return $this->id;
-	}
-
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getName()
-	{
-		return $this->name;
-	}
-
-	public function setName($name)
-	{
-		$this->name = $name;
-	}
-
-	public function getDescription()
-	{
-		return $this->description;
-	}
-
-	public function setDescription($description)
-	{
-		$this->description = $description;
-	}
-	
 	public function getValue()
 	{
 		return $this->value;

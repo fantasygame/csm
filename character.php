@@ -2,7 +2,7 @@
 <?php
 require './autoload.php';
 spl_autoload_register('autoload');
-$db = new Database('localhost', 'root', 'okurwakacper', 'mysql', 'csm');
+$db = new Database('localhost', 'root', '', 'mysql', 'csm');
 ?>
 <html>
 	<head>
@@ -46,13 +46,28 @@ $db = new Database('localhost', 'root', 'okurwakacper', 'mysql', 'csm');
 					<th>Atrybuty</th>
 					<td>
 						<?php
-						$attributeRepository = new AttributeRepository($db);
-						$attributes = $attributeRepository->getAll();
+						$baseAttributeRepository = new BaseAttributeRepository($db);
+						$attributes = $baseAttributeRepository->getAll();
 
 						for ($i = 0; $i < count($attributes); $i++) {
 							$attribute = $attributes[$i];
 							echo '<input type="checkbox" name="attributes[' . $attribute->getId() . ']" value="' . $attribute->getId() . '"/> ' . $attribute->getName();
 							echo '<input type="text" name="attributes[' . $attribute->getId() . '][value]" /><br/>';
+						}
+						?>
+					</td>
+				</tr>
+				<tr>
+					<th>Umiejętności</th>
+					<td>
+						<?php
+						$baseSkillRepository = new BaseSkillRepository($db);
+						$skills = $baseSkillRepository->getAll();
+
+						for ($i = 0; $i < count($skills); $i++) {
+							$skill = $skills[$i];
+							echo '<input type="checkbox" name="skills[' . $skill->getId() . ']" value="' . $skill->getId() . '"/> ('.$skill->getAttribute()->getName().') ' . $skill->getName();
+							echo '<input type="text" name="skills[' . $skill->getId() . '][value]" /><br/>';
 						}
 						?>
 					</td>
