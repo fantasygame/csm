@@ -2,7 +2,7 @@
 <?php
 require './autoload.php';
 spl_autoload_register('autoload');
-$db = new Database('localhost', 'root', '', 'mysql', 'csm');
+$db = new Database('localhost', 'user', 'password', 'mysql', 'csm');
 ?>
 <html>
 	<head>
@@ -99,38 +99,6 @@ $db = new Database('localhost', 'root', '', 'mysql', 'csm');
 						}
 						?>
 					</td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
-				</tr>
-				<tr>
-					<th></th>
-					<td></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" /></td>

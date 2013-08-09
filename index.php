@@ -5,7 +5,7 @@ require './autoload.php';
 spl_autoload_register('autoload');
 
 // connect to database
-$db = new Database('localhost', 'root', '', 'mysql', 'csm');
+$db = new Database('localhost', 'user', 'password', 'mysql', 'csm');
 
 
 $attributeRepository = new AttributeRepository($db);
