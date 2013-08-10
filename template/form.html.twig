@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <title>Character Sheet Manager</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <form method="post" action="form.php">
+            <table>
+                <tr>
+                    <th>Imię postaci</th>
+                    <td><input type="text" name="name"/></td>
+                </tr>
+                <tr>
+                    <th>Rasa</th>
+                    <td>
+                        <select name="race">
+                            <option value="1">Człowiek</option>
+                            <option value="2">Krasnolud</option>
+                            <option value="3">Elf</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Wygląd</th>
+                    <td><input type="text" name="appearance"/></td>
+                </tr>
+                <tr>
+                    <th>Archetyp</th>
+                    <td><input type="text" name="archetype"/></td>
+                </tr>
+                <tr>
+                    <th>Opis</th>
+                    <td><input type="text" name="description"/></td>
+                </tr>
+                <tr>
+                    <th>Doświadczenie</th>
+                    <td><input type="text" name="exp"/></td>
+                </tr>
+                <tr>
+                    <th>Atrybuty <br>i umiejętności</th>
+                    <td>
+                                            {% for attribute in attributes %}
+                                                <b>{{attribute.name}}
+
+                            <input type="radio" name="attribute[{{attribute.id}}]" value="4" checked="checked">k4
+                            <input type="radio" name="attribute[{{attribute.id}}]" value="6">k6
+                            <input type="radio" name="attribute[{{attribute.id}}]" value="8">k8
+                            <input type="radio" name="attribute[{{attribute.id}}]" value="10">k10
+                            <input type="radio" name="attribute[{{attribute.id}}]" value="12">k12
+                            <input type="radio" name="attribute[{{attribute.id}}]" value="13">k12+1
+                            <input type="radio" name="attribute[{{attribute.id}}]" value="14">k12+2
+                            <input type="radio" name="attribute[{{attribute.id}}]" value="15">k12+3<br></b>
+                            {% for skill in skills %}
+                                {% if attribute.id == skill.attribute.id %}
+                                    <i>{{skill.name}}
+                                     <input type="radio" name="skills[{{skill.id}}]" value="0" checked="checked">niewyszkolony
+                                     <input type="radio" name="skills[{{skill.id}}]" value="4">k4
+                                     <input type="radio" name="skills[{{skill.id}}]" value="6">k6
+                                     <input type="radio" name="skills[{{skill.id}}]" value="8">k8
+                                     <input type="radio" name="skills[{{skill.id}}]" value="10">k10
+                                     <input type="radio" name="skills[{{skill.id}}]" value="12">k12
+                                     <input type="radio" name="skills[{{skill.id}}]" value="13">k12+1
+                                     <input type="radio" name="skills[{{skill.id}}]" value="14">k12+2
+                                     <input type="radio" name="skills[{{skill.id}}]" value="15">k12+3<br></i>
+                                     
+                                   
+                                    
+                                {% endif %}
+                                                {%endfor%}<br><br>{%endfor%}
+						{#<?php
+						$baseAttributeRepository = new BaseAttributeRepository($db);
+						$attributes = $baseAttributeRepository->getAll();
+
+						for ($i = 0; $i < count($attributes); $i++) {
+							$attribute = $attributes[$i];
+							echo '<input type="checkbox" name="attributes[' . $attribute->getId() . ']" value="' . $attribute->getId() . '"/> ' . $attribute->getName();
+							echo '<input type="text" name="attributes[' . $attribute->getId() . '][value]" /><br/>';
+						}
+						?> #}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Umiejętności</th>
+                        <td>
+						{#<?php
+						$baseSkillRepository = new BaseSkillRepository($db);
+						$skills = $baseSkillRepository->getAll();
+
+						for ($i = 0; $i < count($skills); $i++) {
+							$skill = $skills[$i];
+							echo '<input type="checkbox" name="skills[' . $skill->getId() . ']" value="' . $skill->getId() . '"/> ('.$skill->getAttribute()->getName().') ' . $skill->getName();
+							echo '<input type="text" name="skills[' . $skill->getId() . '][value]" /><br/>';
+						}
+						?>#}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Przewagi</th>
+                            
+                        
+                            <td>
+                         {% for edge in edges %}     
+                          <input type="checkbox" name="edges[]" value="{{edge.id}}"/><b>{{edge.name}}</b>  <br>     
+						{#<?php
+						$edgeRepository = new EdgeRepository($db);
+						$edges = $edgeRepository->getAll();
+
+						for ($i = 0; $i < count($edges); $i++) {
+							$edge = $edges[$i];
+							echo '<input type="checkbox" name="edges[]" value="' . $edge->getId() . '"/> ' . $edge->getName() . '<br/>';
+						}
+						?>#}
+                              {% endfor %}  </td>
+                            </tr>
+                            <tr>
+                                <th>Zawady</th>
+                                <td>{% for hindrance in hindrances %}     
+                          <input type="checkbox" name="hindrances[]" value="{{hindrance.id}}"/><b>{{hindrance.name}}</b>  <br>     
+						
+                              {% endfor %}  
+						{#<?php
+						$hindranceRepository = new HindranceRepository($db);
+						$hindrances = $hindranceRepository->getAll();
+
+						for ($i = 0; $i < count($hindrances); $i++) {
+							$hindrance = $hindrances[$i];
+							echo '<input type="checkbox" name="hindrances[]" value="' . $hindrance->getId() . '"/> ' . $hindrance->getName() . '<br/>';
+						}
+						?>#}
+                                    </td>
+                                </tr>
+                                <tr><th><b>Moce</b></th>
+                                        
+                                    <td>{% for power in powers %}     
+                          <input type="checkbox" name="powers[]" value="{{power.id}}"/><b>{{power.name}}</b>  <br>     
+						
+                              {% endfor %}  </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><input type="submit" /></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </body>
+                </html>

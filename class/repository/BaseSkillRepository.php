@@ -15,11 +15,14 @@ class BaseSkillRepository
 		$this->db = $db;
 	}
 
-	public function getAll()
+	public function getAll($orderBy = false)
 	{
 		$query = "
 		SELECT * FROM `skill`
 		";
+                if( $orderBy){
+                    $query = "$query ORDER BY `$orderBy`";
+                }
 		$handle = $this->db->query($query);
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
 		$skills = array();
