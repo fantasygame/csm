@@ -18,7 +18,7 @@ $sheetRepository = new SheetRepository($db);
 // create sample Sheet
 $sheet = $sheetRepository->gimmeNaklatanox();
 
-echo $twig->render('character.html.twig', array('sheet' => $sheet));
+//echo $twig->render('character.html.twig', array('sheet' => $sheet));
 
 // persist Sheet in database (catching errors)
 // persist method uses transaction http://en.wikipedia.org/wiki/Database_transaction

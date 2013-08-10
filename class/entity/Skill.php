@@ -15,6 +15,14 @@ class Skill extends BaseSkill
 		parent::__construct($id, $name, $attribute);
 		$this->value = $value;
 	}
+        public function getValue() {
+            return $this->value;
+        }
+
+        public function setValue($value) {
+            $this->value = $value;
+        }
+
 
 }
 
