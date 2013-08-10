@@ -40,6 +40,11 @@ class SkillRepository
 		$handle->execute();
 	}
 
+	public function getById($id)
+	{
+		
+	}
+
 }
 
 ?>

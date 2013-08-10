@@ -23,7 +23,7 @@ class SheetRepository
 	public function persist(Sheet $sheet)
 	{
 		$this->db->beginTransaction();
-		
+
 		$query = "
 		INSERT INTO `sheet` (
 			`id` ,
@@ -56,9 +56,9 @@ class SheetRepository
 		$handle->bindParam(':description', $sheet->getDescription(), Database::PARAM_STR);
 		$handle->bindParam(':exp', $sheet->getExp(), Database::PARAM_STR);
 		$handle->execute();
-		
+
 		$this->persistRelations($sheet);
-		
+
 		// Commits transaction
 		$this->db->commit();
 	}
@@ -68,10 +68,87 @@ class SheetRepository
 	 * @param type $id
 	 * @return Sheet
 	 */
-	public function create($id)
+	public function getById($id)
 	{
 		$sheet = new Sheet();
+
+		$query = "
+		SELECT *
+		FROM `sheet`
+		WHERE `id` = :id
+		";
+
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $id, Database::PARAM_INT);
+		$handle->execute();
+
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		$result = $result[0];
+
+		$sheet->setId($id);
+		$sheet->setName($result['name']);
+		$sheet->setUser($result['user_id']);
+		$sheet->setRace($result['race_id']);
+		$sheet->setAppearance($result['appearance']);
+		$sheet->setArchetype($result['archetype']);
+		$sheet->setDescription($result['description']);
+		$sheet->setExp($result['exp']);
+
+		$edges = $this->getEdges($id);
+		$sheet->setEdges($edges);
+		
+		$hindrances = $this->getHindrances($id);
+		$sheet->setHindrances($hindrances);
+		
 		return $sheet;
+	}
+
+	private function getEdges($id)
+	{
+		$query = "
+		SELECT `edge_id`
+		FROM `sheet_edge`
+		WHERE `sheet_id` = :id
+		";
+
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $id, Database::PARAM_INT);
+		$handle->execute();
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		
+		$edgeRepository = new EdgeRepository($this->db);
+		$edges = array();
+
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$edge = $edgeRepository->getById($res['edge_id']);
+			$edges[] = $edge;
+		}
+		return $edges;
+	}
+	
+	private function getHindrances($id)
+	{
+		$query = "
+		SELECT `hindrance_id`
+		FROM `sheet_hindrance`
+		WHERE `sheet_id` = :id
+		";
+
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $id, Database::PARAM_INT);
+		$handle->execute();
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		
+		$hindranceRepository = new HindranceRepository($this->db);
+		$hindrances = array();
+
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$hindrance = $hindranceRepository->getById($res['hindrance_id']);
+			$hindrances[] = $hindrance;
+		}
+		return $hindrances;
 	}
 
 	/**

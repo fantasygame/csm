@@ -61,6 +61,26 @@ class HindranceRepository
 		}
 		return $hindrances;
 	}
+	
+	public function getById($id)
+	{
+		$query = "
+			SELECT *
+			FROM `hindrance`
+			WHERE `id` = :id
+		";
+		
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $id, Database::PARAM_INT);
+		$handle->execute();
+		
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		$res = $result[0];
+		
+		$hindrance = new Hindrance($res['id'], $res['name'], $res['description']);
+		
+		return $hindrance;
+	}
 
 }
 
