@@ -10,7 +10,7 @@ $loader = new Twig_Loader_Filesystem('template');
 $twig = new Twig_Environment($loader);
 
 // connect to database
-$db = new Database('localhost', 'root', 'okurwakacper', 'mysql', 'csm');
+$db = new Database('localhost', 'psw0', 'okurwakacper', 'mysql', 'csm');
 
 $baseAttributeRepository = new BaseAttributeRepository($db);
 $attributes = $baseAttributeRepository->getAll();

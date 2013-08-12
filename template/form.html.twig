@@ -42,14 +42,14 @@
                                             {% for attribute in attributes %}
                                                 <b>{{attribute.name}}
 
-                            <input type="radio" name="attribute[{{attribute.id}}]" value="4" checked="checked">k4
-                            <input type="radio" name="attribute[{{attribute.id}}]" value="6">k6
-                            <input type="radio" name="attribute[{{attribute.id}}]" value="8">k8
-                            <input type="radio" name="attribute[{{attribute.id}}]" value="10">k10
-                            <input type="radio" name="attribute[{{attribute.id}}]" value="12">k12
-                            <input type="radio" name="attribute[{{attribute.id}}]" value="13">k12+1
-                            <input type="radio" name="attribute[{{attribute.id}}]" value="14">k12+2
-                            <input type="radio" name="attribute[{{attribute.id}}]" value="15">k12+3<br></b>
+                            <input type="radio" name="attributes[{{attribute.id}}]" value="4" checked="checked">k4
+                            <input type="radio" name="attributes[{{attribute.id}}]" value="6">k6
+                            <input type="radio" name="attributes[{{attribute.id}}]" value="8">k8
+                            <input type="radio" name="attributes[{{attribute.id}}]" value="10">k10
+                            <input type="radio" name="attributes[{{attribute.id}}]" value="12">k12
+                            <input type="radio" name="attributes[{{attribute.id}}]" value="13">k12+1
+                            <input type="radio" name="attributes[{{attribute.id}}]" value="14">k12+2
+                            <input type="radio" name="attributes[{{attribute.id}}]" value="15">k12+3<br></b>
                             {% for skill in skills %}
                                 {% if attribute.id == skill.attribute.id %}
                                     <i>{{skill.name}}

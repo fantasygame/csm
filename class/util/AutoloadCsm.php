@@ -24,7 +24,8 @@ class AutoloadCsm
 			'./class/entity/',
 			'./class/repository/',
 			'./class/lib/',
-			'./class/util/'
+			'./class/util/',
+			'./class/forms/'
 		);
 		foreach ($directories as $directory) {
 			if (file_exists($directory . $class_name . '.php')) {
