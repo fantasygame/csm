@@ -1,0 +1,26 @@
+{# base template #}
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}{% endblock %}</title>
+		{% block css %}{% endblock %}
+		{% block js %}{% endblock %}
+    </head>
+    <body class="show">
+		<div id="content">
+			<div id="header">
+				{% block header %}
+				{% endblock %}
+			</div>
+			<div id="body">
+				{% block body %}
+				{% endblock %}
+			</div>
+			<div id="footer">
+				{% block footer %}
+				{% endblock %}
+			</div>
+		</div>
+	</body>
+</html>
