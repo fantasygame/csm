@@ -83,7 +83,7 @@ class SheetRepository
 		$handle->execute();
 
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-		if(count($result) == 0) {
+		if (count($result) == 0) {
 			throw new Exception("Sheet not found ($id)");
 		}
 		$result = $result[0];
@@ -97,136 +97,22 @@ class SheetRepository
 		$sheet->setDescription($result['description']);
 		$sheet->setExp($result['exp']);
 
-		$edges = $this->getEdges($sheet);
-		$sheet->setEdges($edges);
-
-		$hindrances = $this->getHindrances($sheet);
-		$sheet->setHindrances($hindrances);
-
-		$powers = $this->getPowers($sheet);
-		$sheet->setPowers($powers);
-
-		$attributes = $this->getAttributes($sheet);
-		$sheet->setAttributes($attributes);
-
-		$skills = $this->getSkills($sheet);
-		$sheet->setSkills($skills);
-
-		return $sheet;
-	}
-
-	private function getSkills(Sheet $sheet)
-	{
-		$query = "
-		SELECT `skill_id`, `value`
-		FROM `sheet_skill`
-		WHERE `sheet_id` = :id
-		";
-		$handle = $this->db->prepare($query);
-		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
-		$handle->execute();
-		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-		$skillRepository = new SkillRepository($this->db);
-		$skills = array();
-		for ($i = 0; $i < count($result); $i++) {
-			$res = $result[$i];
-			$skill = $skillRepository->getById($res['skill_id'], $res['value'], $sheet);
-			$skills[] = $skill;
-		}
-		return $skills;
-	}
-
-	private function getAttributes(Sheet $sheet)
-	{
-		$query = "
-		SELECT `attribute_id`, `value`
-		FROM `sheet_attribute`
-		WHERE `sheet_id` = :id
-		";
-		$handle = $this->db->prepare($query);
-		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
-		$handle->execute();
-		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-		$attributeRepository = new AttributeRepository($this->db);
-		$attributes = array();
-		for ($i = 0; $i < count($result); $i++) {
-			$res = $result[$i];
-			$attribute = $attributeRepository->getById($res['attribute_id'], $res['value']);
-			$attributes[] = $attribute;
-		}
-		return $attributes;
-	}
-
-	private function getEdges(Sheet $sheet)
-	{
-		$query = "
-		SELECT `edge_id`
-		FROM `sheet_edge`
-		WHERE `sheet_id` = :id
-		";
-
-		$handle = $this->db->prepare($query);
-		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
-		$handle->execute();
-		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-
 		$edgeRepository = new EdgeRepository($this->db);
-		$edges = array();
-
-		for ($i = 0; $i < count($result); $i++) {
-			$res = $result[$i];
-			$edge = $edgeRepository->getById($res['edge_id']);
-			$edges[] = $edge;
-		}
-		return $edges;
-	}
-
-	private function getHindrances(Sheet $sheet)
-	{
-		$query = "
-		SELECT `hindrance_id`
-		FROM `sheet_hindrance`
-		WHERE `sheet_id` = :id
-		";
-
-		$handle = $this->db->prepare($query);
-		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
-		$handle->execute();
-		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		$sheet->setEdges($edgeRepository->getForSheet($sheet));
 
 		$hindranceRepository = new HindranceRepository($this->db);
-		$hindrances = array();
-
-		for ($i = 0; $i < count($result); $i++) {
-			$res = $result[$i];
-			$hindrance = $hindranceRepository->getById($res['hindrance_id']);
-			$hindrances[] = $hindrance;
-		}
-		return $hindrances;
-	}
-
-	private function getPowers(Sheet $sheet)
-	{
-		$query = "
-		SELECT `power_id`
-		FROM `sheet_power`
-		WHERE `sheet_id` = :id
-		";
-
-		$handle = $this->db->prepare($query);
-		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
-		$handle->execute();
-		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		$sheet->setHindrances($hindranceRepository->getForSheet($sheet));
 
 		$powerRepository = new PowerRepository($this->db);
-		$powers = array();
+		$sheet->setPowers($powerRepository->getForSheet($sheet));
 
-		for ($i = 0; $i < count($result); $i++) {
-			$res = $result[$i];
-			$power = $powerRepository->getById($res['power_id']);
-			$powers[] = $power;
-		}
-		return $powers;
+		$attributeRepository = new AttributeRepository($this->db);
+		$sheet->setAttributes($attributeRepository->getForSheet($sheet));
+
+		$skillRepository = new SkillRepository($this->db);
+		$sheet->setSkills($skillRepository->getForSheet($sheet));
+
+		return $sheet;
 	}
 
 	/**
@@ -235,76 +121,20 @@ class SheetRepository
 	 */
 	private function persistRelations(Sheet $sheet)
 	{
-		$this->persistHindrances($sheet);
-		$this->persistEdges($sheet);
-		$this->persistSkills($sheet);
-		$this->persistPowers($sheet);
-		$this->persistAttributes($sheet);
-	}
-
-	/**
-	 * Persists Hindrance relations
-	 * @param Sheet $sheet
-	 */
-	private function persistHindrances(Sheet $sheet)
-	{
-		$hindrances = $sheet->getHindrances();
 		$hindranceRepository = new HindranceRepository($this->db);
-		for ($i = 0; $i < count($hindrances); $i++) {
-			$hindranceRepository->persistRelation($hindrances[$i], $sheet);
-		}
-	}
-
-	/**
-	 * Persists Edge relations
-	 * @param Sheet $sheet
-	 */
-	private function persistEdges(Sheet $sheet)
-	{
-		$edges = $sheet->getEdges();
+		$hindranceRepository->persistRelations($sheet);
+		
 		$edgeRepository = new EdgeRepository($this->db);
-		for ($i = 0; $i < count($edges); $i++) {
-			$edgeRepository->persistRelation($edges[$i], $sheet);
-		}
-	}
-
-	/**
-	 * Persists Skill relations
-	 * @param Sheet $sheet
-	 */
-	private function persistSkills(Sheet $sheet)
-	{
-		$skills = $sheet->getSkills();
+		$edgeRepository->persistRelations($sheet);
+		
 		$skillRepository = new SkillRepository($this->db);
-		for ($i = 0; $i < count($skills); $i++) {
-			$skillRepository->persistRelation($skills[$i], $sheet);
-		}
-	}
-
-	/**
-	 * Persists Power relations
-	 * @param Sheet $sheet
-	 */
-	private function persistPowers(Sheet $sheet)
-	{
-		$powers = $sheet->getPowers();
+		$skillRepository->persistRelations($sheet);
+		
 		$powerRepository = new PowerRepository($this->db);
-		for ($i = 0; $i < count($powers); $i++) {
-			$powerRepository->persistRelation($powers[$i], $sheet);
-		}
-	}
-
-	/**
-	 * Persists Attribute relations
-	 * @param Sheet $sheet
-	 */
-	private function persistAttributes(Sheet $sheet)
-	{
-		$attributes = $sheet->getAttributes();
+		$powerRepository->persistRelations($sheet);
+		
 		$attributeRepository = new AttributeRepository($this->db);
-		for ($i = 0; $i < count($attributes); $i++) {
-			$attributeRepository->persistRelation($attributes[$i], $sheet);
-		}
+		$attributeRepository->persistRelations($sheet);
 	}
 
 	/**

@@ -17,11 +17,23 @@ class HindranceRepository
 	}
 
 	/**
+	 * Persists Hindrance relations
+	 * @param Sheet $sheet
+	 */
+	public function persistRelations(Sheet $sheet)
+	{
+		$hindrances = $sheet->getHindrances();
+		for ($i = 0; $i < count($hindrances); $i++) {
+			$this->persistRelation($hindrances[$i], $sheet);
+		}
+	}
+
+	/**
 	 * Persists relation between Attribute and Hindrance
 	 * @param Hindrance $hindrance
 	 * @param Sheet $sheet
 	 */
-	public function persistRelation(Hindrance $hindrance, Sheet $sheet)
+	private function persistRelation(Hindrance $hindrance, Sheet $sheet)
 	{
 		$query = "
 		INSERT INTO `sheet_hindrance` (
@@ -61,7 +73,7 @@ class HindranceRepository
 		}
 		return $hindrances;
 	}
-	
+
 	public function getById($id)
 	{
 		$query = "
@@ -69,20 +81,42 @@ class HindranceRepository
 			FROM `hindrance`
 			WHERE `id` = :id
 		";
-		
+
 		$handle = $this->db->prepare($query);
 		$handle->bindParam(':id', $id, Database::PARAM_INT);
 		$handle->execute();
-		
+
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-		if(count($result) == 0) {
+		if (count($result) == 0) {
 			throw new Exception("Hindrance not found ($id)");
 		}
 		$res = $result[0];
-		
+
 		$hindrance = new Hindrance($res['id'], $res['name'], $res['description']);
-		
+
 		return $hindrance;
+	}
+
+	public function getForSheet(Sheet $sheet)
+	{
+		$query = "
+		SELECT `hindrance_id`
+		FROM `sheet_hindrance`
+		WHERE `sheet_id` = :id
+		";
+
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
+		$handle->execute();
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+
+		$hindrances = array();
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$hindrance = $this->getById($res['hindrance_id']);
+			$hindrances[] = $hindrance;
+		}
+		return $hindrances;
 	}
 
 }

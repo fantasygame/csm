@@ -44,14 +44,27 @@ class PowerRepository
 		";
 		$handle = $this->db->prepare($query);
 		$handle->bindParam(':id', $id, Database::PARAM_INT);
+		$handle->execute();
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-		if(count($result) == 0) {
+		if (count($result) == 0) {
 			throw new Exception("Power not found ($id)");
 		}
 		$res = $result[0];
 		$power = new Power($res['id'], $res['name'], $res['description']);
-		
+
 		return $power;
+	}
+
+	/**
+	 * Persists Power relations
+	 * @param Sheet $sheet
+	 */
+	public function persistRelations(Sheet $sheet)
+	{
+		$powers = $sheet->getPowers();
+		for ($i = 0; $i < count($powers); $i++) {
+			$this->persistRelation($powers[$i], $sheet);
+		}
 	}
 
 	/**
@@ -59,7 +72,7 @@ class PowerRepository
 	 * @param Power $power
 	 * @param Sheet $sheet
 	 */
-	public function persistRelation(Power $power, Sheet $sheet)
+	private function persistRelation(Power $power, Sheet $sheet)
 	{
 		$query = "
 		INSERT INTO `sheet_power` (
@@ -77,6 +90,28 @@ class PowerRepository
 		$handle->bindParam(':sheet_id', $sheet->getId(), PDO::PARAM_INT);
 		$handle->bindParam(':power_id', $power->getId(), PDO::PARAM_INT);
 		$handle->execute();
+	}
+
+	public function getForSheet(Sheet $sheet)
+	{
+		$query = "
+		SELECT `power_id`
+		FROM `sheet_power`
+		WHERE `sheet_id` = :id
+		";
+
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
+		$handle->execute();
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+
+		$powers = array();
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$power = $this->getById($res['power_id']);
+			$powers[] = $power;
+		}
+		return $powers;
 	}
 
 }

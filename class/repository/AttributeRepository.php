@@ -17,11 +17,23 @@ class AttributeRepository
 	}
 
 	/**
+	 * Persists Attribute relations
+	 * @param Sheet $sheet
+	 */
+	public function persistRelations(Sheet $sheet)
+	{
+		$attributes = $sheet->getAttributes();
+		for ($i = 0; $i < count($attributes); $i++) {
+			$this->persistRelation($attributes[$i], $sheet);
+		}
+	}
+
+	/**
 	 * Persists relation between Attribute and Sheet
 	 * @param Attribute $attribute
 	 * @param Sheet $sheet
 	 */
-	public function persistRelation(Attribute $attribute, Sheet $sheet)
+	private function persistRelation(Attribute $attribute, Sheet $sheet)
 	{
 		$query = "
 		INSERT INTO `sheet_attribute` (
@@ -47,6 +59,26 @@ class AttributeRepository
 		$base = $baseAttributeRepository->getById($id);
 		$attribute = new Attribute($base->getId(), $base->getName(), $base->getDescription(), $value);
 		return $attribute;
+	}
+
+	public function getForSheet(Sheet $sheet)
+	{
+		$query = "
+		SELECT `attribute_id`, `value`
+		FROM `sheet_attribute`
+		WHERE `sheet_id` = :id
+		";
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
+		$handle->execute();
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		$attributes = array();
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$attribute = $this->getById($res['attribute_id'], $res['value']);
+			$attributes[] = $attribute;
+		}
+		return $attributes;
 	}
 
 }

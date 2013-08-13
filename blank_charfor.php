@@ -10,7 +10,7 @@ $loader = new Twig_Loader_Filesystem('template');
 $twig = new Twig_Environment($loader);
 
 // connect to database
-$db = new Database('localhost', 'root', '', 'mysql', 'csm');
+$db = new Database('localhost', 'user', 'password', 'mysql', 'csm');
 
 $baseAttributeRepository = new BaseAttributeRepository($db);
 $attributes = $baseAttributeRepository->getAll();
@@ -28,7 +28,7 @@ $powerRepository = new PowerRepository($db);
 $powers = $powerRepository->getAll();
 
 $sheetRepository = new SheetRepository($db);
-$sheet = $sheetRepository->gimmeNaklatanox();
+$sheet = $sheetRepository->getById(1);
 
 echo $twig->render('form.html.twig', array('attributes' => $attributes, 'skills'=> $skills, 'edges' => $edges, 'hindrances' => $hindrances, 'powers' => $powers, 'sheet' => $sheet));
 ?>
