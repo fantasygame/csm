@@ -40,9 +40,20 @@ class SkillRepository
 		$handle->execute();
 	}
 
-	public function getById($id)
+	public function getById($id, $value, Sheet $sheet)
 	{
-		
+		$query = "
+		SELECT * FROM `skill`
+		WHERE `id` = :id
+		";
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $id);
+		$handle->execute();
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		$res = $result[0];
+
+		$skill = new Skill($res['id'], $res['name'], $value, $sheet->getAttribute($res['attribute_id']));
+		return $skill;
 	}
 
 }

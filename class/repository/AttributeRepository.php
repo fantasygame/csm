@@ -41,6 +41,14 @@ class AttributeRepository
 		$handle->execute();
 	}
 
+	public function getById($id, $value)
+	{
+		$baseAttributeRepository = new BaseAttributeRepository($this->db);
+		$base = $baseAttributeRepository->getById($id);
+		$attribute = new Attribute($base->getId(), $base->getName(), $base->getDescription(), $value);
+		return $attribute;
+	}
+
 }
 
 ?>

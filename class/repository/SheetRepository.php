@@ -94,16 +94,67 @@ class SheetRepository
 		$sheet->setDescription($result['description']);
 		$sheet->setExp($result['exp']);
 
-		$edges = $this->getEdges($id);
+		$edges = $this->getEdges($sheet);
 		$sheet->setEdges($edges);
-		
-		$hindrances = $this->getHindrances($id);
+
+		$hindrances = $this->getHindrances($sheet);
 		$sheet->setHindrances($hindrances);
-		
+
+		$powers = $this->getPowers($sheet);
+		$sheet->setPowers($powers);
+
+		$attributes = $this->getAttributes($sheet);
+		$sheet->setAttributes($attributes);
+
+		$skills = $this->getSkills($sheet);
+		$sheet->setSkills($skills);
+
 		return $sheet;
 	}
 
-	private function getEdges($id)
+	private function getSkills(Sheet $sheet)
+	{
+		$query = "
+		SELECT `skill_id`, `value`
+		FROM `sheet_skill`
+		WHERE `sheet_id` = :id
+		";
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
+		$handle->execute();
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		$skillRepository = new SkillRepository($this->db);
+		$skills = array();
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$skill = $skillRepository->getById($res['skill_id'], $res['value'], $sheet);
+			$skills[] = $skill;
+		}
+		return $skills;
+	}
+
+	private function getAttributes(Sheet $sheet)
+	{
+		$query = "
+		SELECT `attribute_id`, `value`
+		FROM `sheet_attribute`
+		WHERE `sheet_id` = :id
+		";
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
+		$handle->execute();
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		$attributeRepository = new AttributeRepository($db);
+		$attributes = array();
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$attribute = $attributeRepository->getById($res['attribute_id'], $res['value']);
+			$attributes[] = $attribute;
+		}
+		return $attributes;
+	}
+
+	private function getEdges(Sheet $sheet)
 	{
 		$query = "
 		SELECT `edge_id`
@@ -112,10 +163,10 @@ class SheetRepository
 		";
 
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(':id', $id, Database::PARAM_INT);
+		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
 		$handle->execute();
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-		
+
 		$edgeRepository = new EdgeRepository($this->db);
 		$edges = array();
 
@@ -126,8 +177,8 @@ class SheetRepository
 		}
 		return $edges;
 	}
-	
-	private function getHindrances($id)
+
+	private function getHindrances(Sheet $sheet)
 	{
 		$query = "
 		SELECT `hindrance_id`
@@ -136,10 +187,10 @@ class SheetRepository
 		";
 
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(':id', $id, Database::PARAM_INT);
+		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
 		$handle->execute();
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-		
+
 		$hindranceRepository = new HindranceRepository($this->db);
 		$hindrances = array();
 
@@ -149,6 +200,30 @@ class SheetRepository
 			$hindrances[] = $hindrance;
 		}
 		return $hindrances;
+	}
+
+	private function getPowers(Sheet $sheet)
+	{
+		$query = "
+		SELECT `power_id`
+		FROM `sheet_power`
+		WHERE `sheet_id` = :id
+		";
+
+		$handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
+		$handle->execute();
+		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+
+		$powerRepository = new PowerRepository($this->db);
+		$powers = array();
+
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$power = $powerRepository->getById($res['hindrance_id']);
+			$powers[] = $power;
+		}
+		return $powers;
 	}
 
 	/**
