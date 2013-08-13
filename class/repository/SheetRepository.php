@@ -344,13 +344,13 @@ class SheetRepository
 
 		$nakl->setHindrances($hindrances);
 
-		$skills[] = new Skill(1, 'Wspinaczka', 6, $strength);
+		$skills[] = new Skill(1, 'Wspinaczka', 10, $strength);
 		$skills[] = new Skill(2, 'Taplanie się w blotku jak swinka', 6, $agility);
 		$skills[] = new Skill(3, 'Napierdalanka', 12, $agility);
 
 		$nakl->setSkills($skills);
 
-		$race = new Race(1, 'człowiek');
+		$race = new Race(2, 'krasnolud');
 
 		$powers = array();
 		$powers[] = new Power(1, 'koń', 'z ogonkiem');
