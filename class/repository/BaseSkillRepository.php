@@ -46,6 +46,9 @@ class BaseSkillRepository
 		$handle->bindParam(':id', $id);
 		$handle->execute();
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		if(count($result) == 0) {
+			throw new Exception("Skill not found ($id)");
+		}
 		$res = $result[0];
 		$baseAttributeRepository = new BaseAttributeRepository($this->db);
 		$skill = new BaseSkill($res['id'], $res['name'], $baseAttributeRepository->getById($res['attribute_id']));

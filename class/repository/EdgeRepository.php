@@ -79,6 +79,9 @@ class EdgeRepository
 		$handle->execute();
 		
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		if(count($result) == 0) {
+			throw new Exception("Edge not found ($id)");
+		}
 		$res = $result[0];
 		
 		$edge = new Edge($res['id'], $res['name'], $res['description']);

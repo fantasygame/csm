@@ -50,6 +50,9 @@ class SkillRepository
 		$handle->bindParam(':id', $id);
 		$handle->execute();
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		if(count($result) == 0) {
+			throw new Exception("Skill not found ($id)");
+		}
 		$res = $result[0];
 
 		$skill = new Skill($res['id'], $res['name'], $value, $sheet->getAttribute($res['attribute_id']));

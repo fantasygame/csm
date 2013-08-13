@@ -75,6 +75,9 @@ class HindranceRepository
 		$handle->execute();
 		
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		if(count($result) == 0) {
+			throw new Exception("Hindrance not found ($id)");
+		}
 		$res = $result[0];
 		
 		$hindrance = new Hindrance($res['id'], $res['name'], $res['description']);

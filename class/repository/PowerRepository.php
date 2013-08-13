@@ -42,10 +42,12 @@ class PowerRepository
 		SELECT * FROM `power`
 		WHERE `id` = :id
 		";
-		$handle = $this->db->query($query);
+		$handle = $this->db->prepare($query);
 		$handle->bindParam(':id', $id, Database::PARAM_INT);
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-		
+		if(count($result) == 0) {
+			throw new Exception("Power not found ($id)");
+		}
 		$res = $result[0];
 		$power = new Power($res['id'], $res['name'], $res['description']);
 		

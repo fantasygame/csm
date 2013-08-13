@@ -41,6 +41,9 @@ class BaseAttributeRepository
 		$handle->bindParam(':id', $id, Database::PARAM_INT);
 		$handle->execute();
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		if(count($result) == 0) {
+			throw new Exception("Attribute not found ($id)");
+		}
 		$result = $result[0];
 		$attribute = new BaseAttribute($result['id'], $result['name'], $result['description']);
 		return $attribute;

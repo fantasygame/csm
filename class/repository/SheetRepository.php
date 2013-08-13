@@ -83,6 +83,9 @@ class SheetRepository
 		$handle->execute();
 
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
+		if(count($result) == 0) {
+			throw new Exception("Sheet not found ($id)");
+		}
 		$result = $result[0];
 
 		$sheet->setId($id);
@@ -144,7 +147,7 @@ class SheetRepository
 		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
 		$handle->execute();
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-		$attributeRepository = new AttributeRepository($db);
+		$attributeRepository = new AttributeRepository($this->db);
 		$attributes = array();
 		for ($i = 0; $i < count($result); $i++) {
 			$res = $result[$i];
@@ -220,7 +223,7 @@ class SheetRepository
 
 		for ($i = 0; $i < count($result); $i++) {
 			$res = $result[$i];
-			$power = $powerRepository->getById($res['hindrance_id']);
+			$power = $powerRepository->getById($res['power_id']);
 			$powers[] = $power;
 		}
 		return $powers;

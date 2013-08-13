@@ -21,8 +21,8 @@ class Sheet
 	private $skills;
 	private $attributes;
 	private $powers;
-	
-		public function getAttribute($id)
+
+	public function getAttribute($id)
 	{
 		for ($i = 0; $i < count($this->attributes); $i++) {
 			if ($this->attributes[$i]->getId() == $id) {
