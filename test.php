@@ -30,5 +30,9 @@ $powers = $powerRepository->getAll();
 $sheetRepository = new SheetRepository($db);
 $sheet = $sheetRepository->getById(1);
 
+//$sheetRepository->persist($sheet);
+
+//$sheet = null;
+
 echo $twig->render('form.html.twig', array('attributes' => $attributes, 'skills'=> $skills, 'edges' => $edges, 'hindrances' => $hindrances, 'powers' => $powers, 'sheet' => $sheet));
 ?>
