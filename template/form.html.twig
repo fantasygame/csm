@@ -60,20 +60,17 @@
 					<input type="radio" name="skills[{{skill.getId()}}]" value="14" {% if sheet.getSkill(skill.getId()).getValue() == 14 %} checked="checked" {% endif %} >k12+2
 					<input type="radio" name="skills[{{skill.getId()}}]" value="15" {% if sheet.getSkill(skill.getId()).getValue() == 15 %} checked="checked" {% endif %} >k12+3
 				</i><br />
-                {% endif %}
+				{% endif %}
 				{%endfor%}
-				
 				<br /><br />
 				{%endfor%}
-
 			</td>
 		</tr>
 		<tr>
 			<th>Przewagi</th>
 			<td>
-            {% for edge in edges %}     
-				<input type="checkbox" name="edges[]" value="{{edge.getId()}}" {% if sheet.getEdge(edge.getId()) %} checked="checked" {% endif %} /><b>{{edge.getName()}}</b>  <br>     
-            {% endfor %}
+			{% for edge in edges %}     
+			{% endfor %}
 			</td>
 		</tr>
 		<tr>
@@ -81,7 +78,7 @@
 			<td>
 			{% for hindrance in hindrances %}     
 				<input type="checkbox" name="hindrances[]" value="{{hindrance.getId()}}"{% if sheet.getHindrance(hindrance.getId()) %} checked="checked" {% endif %} /><b>{{hindrance.getName()}}</b>  <br>     
-            {% endfor %}  
+			{% endfor %}  
 			</td>
 		</tr>
 		<tr>
@@ -89,7 +86,7 @@
 			<td>
 			{% for power in powers %}     
 				<input type="checkbox" name="powers[]" value="{{power.getId()}}" {% if sheet.getPower(power.getId()) %} checked="checked" {% endif %} /><b>{{power.getName()}}</b>  <br>     
-            {% endfor %}
+			{% endfor %}
 			</td>
 		</tr>
 		<tr>
