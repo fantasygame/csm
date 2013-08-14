@@ -39,17 +39,20 @@ class AttributeRepository
 		INSERT INTO `sheet_attribute` (
 			`id` ,
 			`sheet_id` ,
-			`attribute_id`			
+			`attribute_id`,
+			`value`
 		)
 		VALUES (
 			NULL,
 			:sheet_id ,
-			:attribute_id
+			:attribute_id,
+			:value
 		);
 		";
 		$handle = $this->db->prepare($query);
 		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);
 		$handle->bindParam(':attribute_id', $attribute->getId(), Database::PARAM_INT);
+		$handle->bindParam(':value', $attribute->getValue(), Database::PARAM_INT);
 		$handle->execute();
 	}
 
