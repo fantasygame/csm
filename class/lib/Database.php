@@ -21,7 +21,7 @@ class Database extends PDO
 		$options = array(
 			Database::ATTR_ERRMODE => Database::ERRMODE_EXCEPTION,
 			Database::ATTR_PERSISTENT => false,
-			Database::MYSQL_ATTR_INIT_COMMAND => 'set names utf8mb4'
+			Database::MYSQL_ATTR_INIT_COMMAND => 'set names utf8'
 		);
 		$dsn = "$engine:host=$host";
 		if(!is_null($database)) {

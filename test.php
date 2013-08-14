@@ -14,8 +14,11 @@ $config = SimpleConfig::getInstance();
 $loader = new Twig_Loader_Filesystem('template');
 $twig = new Twig_Environment($loader);
 
-// connect to database
-$db = new Database($config['db_host'], $config['db_user'], $config['db_password'], $config['db_engine'], $config['db_name']);
+try {
+	$db = new Database($config['db_host'], $config['db_user'], $config['db_password'], $config['db_engine'], $config['db_name']);
+} catch (Exception $e) {
+	exit('Database connect error '. $e->getMessage());
+}
 
 $baseAttributeRepository = new BaseAttributeRepository($db);
 $attributes = $baseAttributeRepository->getAll();
