@@ -6,11 +6,16 @@ require './vendors/sensio/Twig/Autoloader.php';
 Twig_Autoloader::register();
 AutoloadCsm::register();
 
+// configuration (singleton)
+SimpleConfig::setFile('./config/config.php');
+$config = SimpleConfig::getInstance();
+
+// twig loader
 $loader = new Twig_Loader_Filesystem('template');
 $twig = new Twig_Environment($loader);
 
 // connect to database
-$db = new Database('localhost', 'user', 'password', 'mysql', 'csm');
+$db = new Database($config['db_host'], $config['db_user'], $config['db_password'], $config['db_engine'], $config['db_name']);
 
 $baseAttributeRepository = new BaseAttributeRepository($db);
 $attributes = $baseAttributeRepository->getAll();
