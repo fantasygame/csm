@@ -32,6 +32,12 @@ $hindrances = $hindranceRepository->getAll();
 $powerRepository = new PowerRepository($db);
 $powers = $powerRepository->getAll();
 
+$raceRepository = new RaceRepository($db);
+$races = $raceRepository->getAll();
+
+$userRepository = new UserRepository($db);
+$users = $userRepository->getAll();
+
 $sheetRepository = new SheetRepository($db);
 $sheet = $sheetRepository->getById(1);
 
@@ -39,5 +45,5 @@ $sheet = $sheetRepository->getById(1);
 
 //$sheet = null;
 
-echo $twig->render('form.html.twig', array('attributes' => $attributes, 'skills'=> $skills, 'edges' => $edges, 'hindrances' => $hindrances, 'powers' => $powers, 'sheet' => $sheet));
+echo $twig->render('form.html.twig', array('attributes' => $attributes, 'skills'=> $skills, 'edges' => $edges, 'hindrances' => $hindrances, 'powers' => $powers, 'races' => $races, 'users' => $users, 'sheet' => $sheet));
 ?>

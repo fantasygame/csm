@@ -7,12 +7,22 @@
 			<td><input type="text" name="Name" value="{{ sheet.getName() }}" /></td>
 		</tr>
 		<tr>
+			<th>Gracz</th>
+			<td>
+				<select name="user">
+					{% for user in users %}
+					<option value="{{ user.getId() }}" {% if sheet.getUser().getId() == user.getId() %} selected="selected" {% endif %}>{{ user.getName() }}</option> 
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
 			<th>Rasa</th>
 			<td>
 				<select name="race">
-					<option value="1" {% if sheet.getRace().getId() == 1 %} selected="selected" {% endif %}>Człowiek</option> 
-					<option value="2" {% if sheet.getRace().getId() == 2 %} selected="selected" {% endif %}>Krasnolud</option>
-					<option value="3" {% if sheet.getRace().getId() == 3 %} selected="selected" {% endif %}>Elf</option>
+					{% for race in races %}
+					<option value="{{ race.getId() }}" {% if sheet.getRace().getId() == race.getId() %} selected="selected" {% endif %}>{{ race.getName() }}</option> 
+					{% endfor %}
 				</select>
 			</td>
 		</tr>
@@ -37,14 +47,14 @@
 			<td>
 				{% for attribute in attributes %}
 				<b>{{ attribute.getName() }}
-					<input type="radio" name="attribute[{{ attribute.getId() }}]" value="4" checked="checked" {% if sheet.getAttribute(attribute.getId()).getValue() == 4 %} checked="checked" {% endif %}> k4
-					<input type="radio" name="attribute[{{ attribute.getId() }}]" value="6" {% if sheet.getAttribute(attribute.getId()).getValue() == 6 %} checked="checked" {% endif %} >k6
-					<input type="radio" name="attribute[{{ attribute.getId() }}]" value="8" {% if sheet.getAttribute(attribute.getId()).getValue() == 8 %} checked="checked" {% endif %}>k8
-					<input type="radio" name="attribute[{{ attribute.getId() }}]" value="10" {% if sheet.getAttribute(attribute.getId()).getValue() == 10 %} checked="checked" {% endif %}>k10
-					<input type="radio" name="attribute[{{ attribute.getId() }}]" value="12" {% if sheet.getAttribute(attribute.getId()).getValue() == 12 %} checked="checked" {% endif %}>k12
-					<input type="radio" name="attribute[{{ attribute.getId() }}]" value="13" {% if sheet.getAttribute(attribute.getId()).getValue() == 13 %} checked="checked" {% endif %}>k12+1
-					<input type="radio" name="attribute[{{ attribute.getId() }}]" value="14" {% if sheet.getAttribute(attribute.getId()).getValue() == 14 %} checked="checked" {% endif %}>k12+2
-					<input type="radio" name="attribute[{{ attribute.getId() }}]" value="15" {% if sheet.getAttribute(attribute.getId()).getValue() == 15 %} checked="checked" {% endif %} >k12+3
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="4" checked="checked" {% if sheet.getAttribute(attribute.getId()).getValue() == 4 %} checked="checked" {% endif %}> k4
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="6" {% if sheet.getAttribute(attribute.getId()).getValue() == 6 %} checked="checked" {% endif %} >k6
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="8" {% if sheet.getAttribute(attribute.getId()).getValue() == 8 %} checked="checked" {% endif %}>k8
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="10" {% if sheet.getAttribute(attribute.getId()).getValue() == 10 %} checked="checked" {% endif %}>k10
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="12" {% if sheet.getAttribute(attribute.getId()).getValue() == 12 %} checked="checked" {% endif %}>k12
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="13" {% if sheet.getAttribute(attribute.getId()).getValue() == 13 %} checked="checked" {% endif %}>k12+1
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="14" {% if sheet.getAttribute(attribute.getId()).getValue() == 14 %} checked="checked" {% endif %}>k12+2
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="15" {% if sheet.getAttribute(attribute.getId()).getValue() == 15 %} checked="checked" {% endif %} >k12+3
 				</b><br />
 
                 {% for skill in skills %}

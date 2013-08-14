@@ -90,12 +90,16 @@ class SheetRepository
 
 		$sheet->setId($id);
 		$sheet->setName($result['name']);
-		$sheet->setUser($result['user_id']);
-		$sheet->setRace($result['race_id']);
 		$sheet->setAppearance($result['appearance']);
 		$sheet->setArchetype($result['archetype']);
 		$sheet->setDescription($result['description']);
 		$sheet->setExp($result['exp']);
+		
+		$userRepository = new UserRepository($this->db);
+		$sheet->setUser($userRepository->getById($result['user_id']));
+		
+		$raceRepository = new RaceRepository($this->db);
+		$sheet->setRace($raceRepository->getById($result['race_id']));
 
 		$edgeRepository = new EdgeRepository($this->db);
 		$sheet->setEdges($edgeRepository->getForSheet($sheet));
