@@ -19,9 +19,9 @@ class Database extends PDO
 	public function __construct($host, $user, $password, $engine = 'mysql', $database = null)
 	{
 		$options = array(
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-			PDO::ATTR_PERSISTENT => false,
-			PDO::MYSQL_ATTR_INIT_COMMAND => 'set names utf8mb4'
+			Database::ATTR_ERRMODE => Database::ERRMODE_EXCEPTION,
+			Database::ATTR_PERSISTENT => false,
+			Database::MYSQL_ATTR_INIT_COMMAND => 'set names utf8mb4'
 		);
 		$dsn = "$engine:host=$host";
 		if(!is_null($database)) {

@@ -50,8 +50,8 @@ class EdgeRepository
 		";
 
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(':sheet_id', $sheet->getId(), PDO::PARAM_INT);
-		$handle->bindParam(':edge_id', $edge->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);
+		$handle->bindParam(':edge_id', $edge->getId(), Database::PARAM_INT);
 		$handle->execute();
 	}
 

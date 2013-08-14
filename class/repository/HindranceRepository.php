@@ -49,8 +49,8 @@ class HindranceRepository
 		";
 
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(':sheet_id', $sheet->getId(), PDO::PARAM_INT);
-		$handle->bindParam(':hindrance_id', $hindrance->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);
+		$handle->bindParam(':hindrance_id', $hindrance->getId(), Database::PARAM_INT);
 		$handle->execute();
 	}
 

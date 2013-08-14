@@ -87,8 +87,8 @@ class PowerRepository
 		);
 		";
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(':sheet_id', $sheet->getId(), PDO::PARAM_INT);
-		$handle->bindParam(':power_id', $power->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);
+		$handle->bindParam(':power_id', $power->getId(), Database::PARAM_INT);
 		$handle->execute();
 	}
 

@@ -48,8 +48,8 @@ class AttributeRepository
 		);
 		";
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(':sheet_id', $sheet->getId(), PDO::PARAM_INT);
-		$handle->bindParam(':attribute_id', $attribute->getId(), PDO::PARAM_INT);
+		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);
+		$handle->bindParam(':attribute_id', $attribute->getId(), Database::PARAM_INT);
 		$handle->execute();
 	}
 
