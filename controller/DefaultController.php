@@ -10,7 +10,7 @@ class DefaultController extends Controller
 
 	public function indexAction()
 	{
-		echo $this->view->render('home.html.twig');
+		echo $this->getView()->render('home.html.twig');
 	}
 
 }

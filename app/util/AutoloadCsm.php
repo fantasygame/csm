@@ -21,9 +21,9 @@ class AutoloadCsm
 	{
 		$directories = array(
 			'./controller/',
-			'./model/entity/',
-			'./model/repository/',
-			'./model/form/',
+			'./entity/',
+			'./repository/',
+			'./form/',
 			'./app/lib/',
 			'./app/util/'
 		);

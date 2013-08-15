@@ -10,3 +10,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # nice url #
 RewriteRule ^(.*)$ index.php?url=$1
+RewriteRule ^resource\.*$ - [L]

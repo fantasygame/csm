@@ -7,7 +7,9 @@ class Application
 	{
 		$this->checkDependencies();
 		$this->autoLoaders();
-		$this->loadConfig();
+		$c = $this->loadConfig();
+		$database = new Database($c['db_host'], $c['db_user'], $c['db_password'], $c['db_engine'], $c['db_name']);
+		$c['db'] = $database;
 	}
 
 	private function checkDependencies()
@@ -29,7 +31,7 @@ class Application
 	private function loadConfig()
 	{
 		SimpleConfig::setFile('./app/config/config.php');
-		SimpleConfig::getInstance();
+		return SimpleConfig::getInstance();
 	}
 
 }

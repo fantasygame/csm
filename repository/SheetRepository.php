@@ -94,10 +94,10 @@ class SheetRepository
 		$sheet->setArchetype($result['archetype']);
 		$sheet->setDescription($result['description']);
 		$sheet->setExp($result['exp']);
-		
+
 		$userRepository = new UserRepository($this->db);
 		$sheet->setUser($userRepository->getById($result['user_id']));
-		
+
 		$raceRepository = new RaceRepository($this->db);
 		$sheet->setRace($raceRepository->getById($result['race_id']));
 
@@ -119,6 +119,35 @@ class SheetRepository
 		return $sheet;
 	}
 
+	public function getAllSimple()
+	{
+		$query = "
+		SELECT *
+		FROM `sheet`
+		";
+		$handle = $this->db->query($query);
+		$result = $handle->fetchAll();
+		$sheets = array();
+		for ($i = 0; $i < count($result); $i++) {
+			$res = $result[$i];
+			$sheet = new Sheet();
+			$sheet->setId($res['id']);
+			$sheet->setName($res['name']);
+			$sheet->setAppearance($res['appearance']);
+			$sheet->setArchetype($res['archetype']);
+			$sheet->setDescription($res['description']);
+			$sheet->setExp($res['exp']);
+
+			$userRepository = new UserRepository($this->db);
+			$sheet->setUser($userRepository->getById($res['user_id']));
+
+			$raceRepository = new RaceRepository($this->db);
+			$sheet->setRace($raceRepository->getById($res['race_id']));
+			$sheets[] = $sheet;
+		}
+		return $sheets;
+	}
+
 	/**
 	 * Persists Sheet relations
 	 * @param Sheet $sheet
@@ -127,16 +156,16 @@ class SheetRepository
 	{
 		$hindranceRepository = new HindranceRepository($this->db);
 		$hindranceRepository->persistRelations($sheet);
-		
+
 		$edgeRepository = new EdgeRepository($this->db);
 		$edgeRepository->persistRelations($sheet);
-		
+
 		$skillRepository = new SkillRepository($this->db);
 		$skillRepository->persistRelations($sheet);
-		
+
 		$powerRepository = new PowerRepository($this->db);
 		$powerRepository->persistRelations($sheet);
-		
+
 		$attributeRepository = new AttributeRepository($this->db);
 		$attributeRepository->persistRelations($sheet);
 	}

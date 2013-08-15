@@ -6,6 +6,14 @@ $routes = array(
 		'defaultAction' => 'index',
 		'actions' => array(),
 	),
+	'sheet' => array(
+		'controller' => 'SheetController',
+		'actions' => array(
+			'form' => array('id'),
+			'list' => array()
+		),
+		'defaultAction' => 'list'
+	),
 	'user' => array(
 		'controller' => 'UserController',
 		'actions' => array(
@@ -13,6 +21,6 @@ $routes = array(
 			'bye'
 		),
 		'defaultAction' => 'hello'
-	)
+	),
 );
 ?>
