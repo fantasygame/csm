@@ -49,17 +49,17 @@ class Router
 		if (!method_exists($controller, $action)) {
 			throw new Exception('Method "' . $action . '" not found in "' . $route['controller'] . '"');
 		}
-		
+
 		$reflection = new ReflectionMethod($route['controller'], $action);
 		$methodParameters = $reflection->getParameters();
-		
+
 		$parameters = array();
-		
+
 		for ($i = 0; $i < count($methodParameters); $i++) {
 			$param = $methodParameters[$i];
 			/* @var $param ReflectionParameter */
 			$paramName = $param->getName();
-			
+
 			if (in_array($paramName, $routeParameters)) {
 				$position = array_search("$paramName", array_keys($routeParameters));
 				if (isset($url[$position + 2])) {
@@ -67,7 +67,7 @@ class Router
 					continue;
 				}
 			}
-			
+
 			if (!$param->isOptional()) {
 				throw new Exception('Argument "' . $paramName . '" not specified for method "' . $route['controller'] . '::' . $action . '"');
 			} else {
@@ -76,7 +76,6 @@ class Router
 		}
 
 		$reflection->invokeArgs($controller, $parameters);
-//		$controller->$action();
 	}
 
 }

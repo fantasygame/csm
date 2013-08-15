@@ -12,7 +12,7 @@ try {
 	$router->route($request);
 } catch (Exception $e) {
 	if($config['environment'] == 'production') {
-		echo 'Nie ma takiej strony';
+		header("HTTP/1.0 404 Not Found");
 	} else {
 		echo "<p>{$e->getMessage()}</p>";
 		echo "<p>{$e->getFile()}<br/>line {$e->getLine()}</p>";
