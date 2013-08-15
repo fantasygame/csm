@@ -20,11 +20,12 @@ class AutoloadCsm
 	public static function csmAutoload($class_name)
 	{
 		$directories = array(
-			'./class/',
-			'./class/entity/',
-			'./class/repository/',
-			'./class/lib/',
-			'./class/util/'
+			'./controller/',
+			'./model/entity/',
+			'./model/repository/',
+			'./model/form/',
+			'./app/lib/',
+			'./app/util/'
 		);
 		foreach ($directories as $directory) {
 			if (file_exists($directory . $class_name . '.php')) {

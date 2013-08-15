@@ -1,0 +1,12 @@
+Options FollowSymLinks 
+RewriteEngine On
+
+# changes index.html to index.php#
+RewriteRule ^index.html$ index.php [L]
+
+# check user reuest file #
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# nice url #
+RewriteRule ^(.*)$ index.php?url=$1
