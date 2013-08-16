@@ -10,6 +10,8 @@ class Request
 
 	private $url;
 	private $urlString;
+	private $post;
+	private $cookie;
 
 	public function __construct()
 	{
@@ -28,6 +30,10 @@ class Request
 		$this->urlString = $url;
 		$url = explode('/', $url);
 		$this->url = $url;
+		unset($_GET['url']);
+
+		$this->post = $_POST;
+		$this->cookie = $_COOKIE;
 	}
 
 	public function getUrl()
@@ -38,6 +44,21 @@ class Request
 	public function getUrlString()
 	{
 		return $this->urlString;
+	}
+
+	public function getGet()
+	{
+		return $this->get;
+	}
+
+	public function getPost()
+	{
+		return $this->post;
+	}
+
+	public function getCookie()
+	{
+		return $this->cookie;
 	}
 
 }

@@ -8,7 +8,7 @@
 class SheetController extends Controller
 {
 
-	public function formAction($id = null)
+	public function showAction($id = null)
 	{
 
 		$baseAttributeRepository = new BaseAttributeRepository();
@@ -40,6 +40,17 @@ class SheetController extends Controller
 		}
 
 		echo $this->getView()->render('form.html.twig', array('attributes' => $attributes, 'skills' => $skills, 'edges' => $edges, 'hindrances' => $hindrances, 'powers' => $powers, 'races' => $races, 'users' => $users, 'sheet' => $sheet));
+	}
+
+	public function formAction()
+	{
+		$config = SimpleConfig::getInstance();
+		$request = $config->request;
+
+		echo '<pre>';
+		print_r($request->getPost());
+		echo '</pre>';
+		exit();
 	}
 
 	public function listAction()

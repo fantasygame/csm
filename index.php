@@ -11,6 +11,8 @@ try {
 $config = SimpleConfig::getInstance();
 
 $request = new Request();
+$config['request'] = $request;
+
 $router = new Router($config['routing_file']);
 
 try {
