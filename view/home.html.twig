@@ -1,5 +1,99 @@
 {% extends "main.html.twig" %}
 
+{% block css %}
+<style>
+#tutorial {
+	white-space: pre;
+	width: 1200px;
+	margin: auto;
+	margin-bottom: 30px;
+}
+</style>
+{% endblock %}
+
 {% block body %}
-Strona główna
+<div id="tutorial">
+Działa!
+
+<h3>Silnik aplikacji</h3>
+
+Napisałem silnik naszej aplikacji. Jeszcze go rozwijam, ale jest już funkcjonalny.
+Jest on oparty na wzorcu projektowym MVC (Model, View, Controller)
+
+Przykłady działania (patrz na URL)
+<a target="_blank" href="user/hello">Proste wypisanie</a>
+<a target="_blank" href="user/hello/Miszczu">Pobranie argumentu z adresu URL</a>
+<a target="_blank" href="sheet/form">Wyświetlenie formularza karty postaci</a>
+<a target="_blank" href="sheet/form/1">Wczytanie postaci do formularza</a> (ustaw config.php do zewnętrznej bazy)
+<a target="_blank" href="sheet/list">Lista postaci</a>
+
+Co to jest MVC?
+
+MODEL
+Odpowiada za najcięższe prace w programie. Modyfikację i odczyt z bazy, opakowywanie danych w obiekty, obliczenia itp. itd.
+Prawie wszystko co do tej pory robiliśmy to modele.
+Katalogi:
+repository/
+entity/
+
+VIEW
+Widok to kwestia samej prezentacji danych. Upraszczając widok to u nas po prostu szablon twiga.
+Katalog:
+view/
+
+CONTROLLER
+Mózg. Decyduje o tym jakich modeli użyć aby uzyskać dane i jakim widokiem je przetworzyć do wyświetlenia/pobrania.
+Do tej pory za controller służyły nam pliki php. Np. test.php.
+Katalog:
+controller/
+
++
+ROUTER
+Router pozwala uniezależnić adres url od lokalizacji plików w projekcie. Odczytuje adres URL i dzięki konfiguracji wybiera części aplikacji, które mają być uruchomione.
+Konfiguracja:
+app/config/routing.php
+
+Jak to działa?
+Weźmy takie wyświetlanie postaci w formularzu (sheet/form/1)
+W uproszczeniu sheet to nasz controller, form akcja jaką ma wykonać a 1 to argument przekazany do tej akcji (id postaci).
+Zobacz w pliku controller/SheetController.php
+
+
+Jak coś dodać?
+1. Stwórz nowy controller lub wejdź w już istniejący pasujący do twojej funkcjonalności.
+Controller musi się nazywać NazwaController i musi rozszerzać klasę Controller.
+W naszym przykładzie:
+<pre>
+class SheetController extends Controller
+{
+}
+</pre>
+2. Wewnątrz klasy stwórz metodę która będzie wykonywała twoje zadanie. Jej nazwa musi się kończyć na Action
+W naszym przykładzie:
+<pre>
+public function formAction($id)
+{
+}
+</pre>
+3. Wewnątrz stworzonej metody możesz łączyć się z bazą danych i renderować szablony. Zobacz w SheetController na przykłady
+4. Aplikacja nie pozwoli na użycie twojej akcji jeżeli nie ustawisz jej w app/config/routing.php
+W naszym przypadku:
+<pre>
+'sheet' => array(
+		'controller' => 'SheetController', // przypisuje controller do pierwszego członu URL
+		'actions' => array( // ustala jakie akcje (metody) może wykonywać controller (drugi człon)
+			'form' => array('id'), // ustala jakie argumenty może przyjmować controller (nazwa musi być adekwatna do nazwy argumentu w metodzie) (trzeci człon i kolejne)
+			'list' => array()
+		),
+		'defaultAction' => 'list' // domyślna akcja jeżeli nie została wpisana przez użytkownika w URL
+),
+</pre>
+
+
+Czemu jest tylko index.php?
+Zawsze uruchamiany jest tylko index.php. To Router decyduje z którego Controllera korzystać dalej.
+
+Włożyłem sporo pracy w ten framework i proszę was abyście postarali się zrozumieć jego działanie. Nie musicie przeglądać kodu w app/lib i app/util. Wystarczy, że nauczycie się korzystać z tego co napisałem powyżej.
+</div>
+
 {% endblock %}

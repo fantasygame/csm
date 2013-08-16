@@ -8,7 +8,7 @@
 class UserController extends Controller
 {
 
-	public function helloAction($name)
+	public function helloAction($name = '')
 	{
 		echo "Hello $name";
 	}

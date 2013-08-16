@@ -11,11 +11,14 @@ class Application
 		$database = new Database($c['db_host'], $c['db_user'], $c['db_password'], $c['db_engine'], $c['db_name']);
 		$c['db'] = $database;
 	}
-
+	
 	private function checkDependencies()
 	{
-		if (!in_array('mod_rewrite', apache_get_modules())) {
-			throw new Exception('Install mod_rewrite on your server');
+		if(!is_file('vendors/sensio/Twig/Autoloader.php')) {
+			throw new Exception('Install <a href="https://github.com/jkubacki/csm/wiki/Twig">Twig</a>');
+		}
+		if(!is_file('app/config/config.php')) {
+			throw new Exception('Copy config.dist.php to config.php and personalize content of config.php');
 		}
 	}
 

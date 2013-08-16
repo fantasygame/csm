@@ -1,7 +1,12 @@
 <?php
 
 require './app/lib/Application.php';
-new Application();
+
+try {
+	new Application();
+} catch (Exception $e) {
+	exit($e->getMessage());
+}
 
 $config = SimpleConfig::getInstance();
 
@@ -11,7 +16,7 @@ $router = new Router($config['routing_file']);
 try {
 	$router->route($request);
 } catch (Exception $e) {
-	if($config['environment'] == 'production') {
+	if ($config['environment'] == 'production') {
 		header("HTTP/1.0 404 Not Found");
 	} else {
 		echo "<p>{$e->getMessage()}</p>";
