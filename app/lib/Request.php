@@ -18,22 +18,11 @@ class Request
 
 	private function setUrl()
 	{
-		if (!in_array('mod_rewrite', apache_get_modules())) {
-			$uri = $_SERVER['REQUEST_URI'];
-			$matches = array();
-			preg_match_all('!index.php/(.*)!', $uri, $matches);
-			$url = $matches[1][0];
-			if (empty($url)) {
-				$this->url = array('default');
-				return true;
-			}
+		if (!isset($_GET['url'])) {
+			$this->url = array('default');
+			return true;
 		} else {
-			if (!isset($_GET['url'])) {
-				$this->url = array('default');
-				return true;
-			} else {
-				$url = $_GET['url'];
-			}
+			$url = $_GET['url'];
 		}
 		$url = rtrim($url, '/');
 		$this->urlString = $url;
