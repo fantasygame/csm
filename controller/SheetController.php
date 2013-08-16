@@ -48,11 +48,20 @@ class SheetController extends Controller
 	{
 		$config = SimpleConfig::getInstance();
 		$db = $config->db;
-		
+
 		$sheetRepository = new SheetRepository($db);
 		$sheets = $sheetRepository->getAllSimple();
-		
+
 		echo $this->getView()->render('list.html.twig', array('sheets' => $sheets));
+	}
+
+	public function removeAction($id)
+	{
+		$config = SimpleConfig::getInstance();
+		$db = $config->db;
+		
+		$sheetRepository = new SheetRepository($db);
+		$sheetRepository->remove($id);
 	}
 
 }

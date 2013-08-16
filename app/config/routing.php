@@ -10,7 +10,8 @@ $routes = array(
 		'controller' => 'SheetController',
 		'actions' => array(
 			'form' => array('id'),
-			'list' => array()
+			'list' => array(),
+			'remove' => array('id'),
 		),
 		'defaultAction' => 'list'
 	),

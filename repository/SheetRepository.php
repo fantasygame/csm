@@ -148,6 +148,12 @@ class SheetRepository
 		return $sheets;
 	}
 
+	public function remove($id)
+	{
+		//TODO
+		echo "Sheet $id removed";
+	}
+
 	/**
 	 * Persists Sheet relations
 	 * @param Sheet $sheet

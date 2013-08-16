@@ -12,7 +12,7 @@
 		<th>Imię postaci</th>
 		<th>Archetyp</th>
 		<th>Exp</th>
-		<th></th>
+		<th colspan="2"></th>
 	</tr>
 {% for sheet in sheets %}
 	<tr>
@@ -21,6 +21,7 @@
 		<td>{{ sheet.getArchetype() }}</td>
 		<td>{{ sheet.getExp() }}</td>
 		<td><a href="sheet/form/{{ sheet.getId() }}"><button>Edytuj</button></a></td>
+		<td><a href="sheet/remove/{{ sheet.getId() }}"><button>Usuń</button></a></td>
 	</tr>
 {% endfor %}
 </table>
