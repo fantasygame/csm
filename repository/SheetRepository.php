@@ -20,32 +20,51 @@ class SheetRepository
 	 * Persists Sheet in database
 	 * @param Sheet $sheet
 	 */
-	public function persist(Sheet $sheet)
+	public function persist(Sheet $sheet, $update = true)
 	{
-		$this->db->beginTransaction();
 
-		$query = "
-		INSERT INTO `sheet` (
-			`id` ,
-			`user_id` ,
-			`name` ,
-			`race_id` ,
-			`appearance` ,
-			`archetype` ,
-			`description` ,
-			`exp`
-		)
-		VALUES (
-			NULL ,
-			:user_id ,
-			:name ,
-			:race_id ,
-			:appearance ,
-			:archetype ,
-			:description ,
-			:exp
-		);
-		";
+		if ($update) {
+			if (empty($sheet->getId())) {
+				throw new Exception('Cant update Sheet with empty id');
+			}
+			$query = "
+			UPDATE `sheet`
+			SET
+			`user_id` = :user_id,
+			`name` = :name,
+			`race_id` = :race_id,
+			`appearance` = :appearance,
+			`archetype` = :archetype,
+			`description` = :description,
+			`exp` = :exp
+			WHERE `id` = :id
+			";
+		} else {
+			$query = "
+			INSERT INTO `sheet` (
+				`id` ,
+				`user_id` ,
+				`name` ,
+				`race_id` ,
+				`appearance` ,
+				`archetype` ,
+				`description` ,
+				`exp`
+			)
+			VALUES (
+				NULL ,
+				:user_id ,
+				:name ,
+				:race_id ,
+				:appearance ,
+				:archetype ,
+				:description ,
+				:exp
+			);
+			";
+		}
+
+		$this->db->beginTransaction();
 
 		$handle = $this->db->prepare($query);
 		$handle->bindParam(':user_id', $sheet->getUser()->getId(), Database::PARAM_INT);
@@ -55,9 +74,12 @@ class SheetRepository
 		$handle->bindParam(':archetype', $sheet->getArchetype(), Database::PARAM_STR);
 		$handle->bindParam(':description', $sheet->getDescription(), Database::PARAM_STR);
 		$handle->bindParam(':exp', $sheet->getExp(), Database::PARAM_STR);
+		if ($update) {
+			$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
+		}
 		$handle->execute();
 
-		$this->persistRelations($sheet);
+//		$this->persistRelations($sheet, $update);
 
 		// Commits transaction
 		$this->db->commit();
@@ -158,22 +180,22 @@ class SheetRepository
 	 * Persists Sheet relations
 	 * @param Sheet $sheet
 	 */
-	private function persistRelations(Sheet $sheet)
+	private function persistRelations(Sheet $sheet, $update = true)
 	{
 		$hindranceRepository = new HindranceRepository($this->db);
-		$hindranceRepository->persistRelations($sheet);
+		$hindranceRepository->persistRelations($sheet, $update);
 
 		$edgeRepository = new EdgeRepository($this->db);
-		$edgeRepository->persistRelations($sheet);
+		$edgeRepository->persistRelations($sheet, $update);
 
 		$skillRepository = new SkillRepository($this->db);
-		$skillRepository->persistRelations($sheet);
+		$skillRepository->persistRelations($sheet, $update);
 
 		$powerRepository = new PowerRepository($this->db);
-		$powerRepository->persistRelations($sheet);
+		$powerRepository->persistRelations($sheet, $update);
 
 		$attributeRepository = new AttributeRepository($this->db);
-		$attributeRepository->persistRelations($sheet);
+		$attributeRepository->persistRelations($sheet, $update);
 	}
 
 	/**
