@@ -8,61 +8,9 @@
 class HindranceRepository extends Repository
 {
 
-	/**
-	 * Persists Hindrance relations
-	 * @param Sheet $sheet
-	 */
-	public function persistRelations(Sheet $sheet, $update = true)
+	protected function persistRelations(Sheet $sheet, $update = true)
 	{
-		$hindrances = $sheet->getHindrances();
-		for ($i = 0; $i < count($hindrances); $i++) {
-			$this->persistRelation($hindrances[$i], $sheet, $update);
-		}
-	}
-
-	/**
-	 * Persists relation between Attribute and Hindrance
-	 * @param Hindrance $hindrance
-	 * @param Sheet $sheet
-	 */
-	private function persistRelation(Hindrance $hindrance, Sheet $sheet, $update = true)
-	{
-		if ($update) {
-			$query = "
-			UPDATE `sheet_hindrance` (
-				`id` ,
-				`sheet_id` ,
-				`hindrance_id`			
-			)
-			VALUES (
-				:id,
-				:sheet_id ,
-				:hindrance_id	
-			);
-			";
-		} else {
-			$query = "
-			INSERT INTO `sheet_hindrance` (
-				`id` ,
-				`sheet_id` ,
-				`hindrance_id`			
-			)
-			VALUES (
-				NULL,
-				:sheet_id ,
-				:hindrance_id	
-			);
-			";
-		}
-
-
-		$handle = $this->db->prepare($query);
-		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);
-		$handle->bindParam(':hindrance_id', $hindrance->getId(), Database::PARAM_INT);
-		if ($update) {
-			$handle->bindParam(':id', $hindrance->getId(), Database::PARAM_INT);
-		}
-		$handle->execute();
+		parent::persistRelations($sheet, $update, 'getHindrances', 'getForSheet');
 	}
 
 	public function getAll()

@@ -8,43 +8,9 @@
 class EdgeRepository extends Repository
 {
 
-	/**
-	 * Persists Edge relations
-	 * @param Sheet $sheet
-	 */
-	public function persistRelations(Sheet $sheet)
+	protected function persistRelations(Sheet $sheet, $update = true)
 	{
-		$edges = $sheet->getEdges();
-
-		for ($i = 0; $i < count($edges); $i++) {
-			$this->persistRelation($edges[$i], $sheet);
-		}
-	}
-
-	/**
-	 * Persists relation between Attribute and Edge
-	 * @param Edge $edge
-	 * @param Sheet $sheet
-	 */
-	private function persistRelation(Edge $edge, Sheet $sheet)
-	{
-		$query = "
-		INSERT INTO `sheet_edge` (
-			`id` ,
-			`sheet_id` ,
-			`edge_id`			
-		)
-		VALUES (
-			NULL,
-			:sheet_id ,
-			:edge_id	
-		);
-		";
-
-		$handle = $this->db->prepare($query);
-		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);
-		$handle->bindParam(':edge_id', $edge->getId(), Database::PARAM_INT);
-		$handle->execute();
+		parent::persistRelations($sheet, $update, 'getEdges', 'getForSheet');
 	}
 
 	/**

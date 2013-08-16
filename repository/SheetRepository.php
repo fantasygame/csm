@@ -72,7 +72,7 @@ class SheetRepository extends Repository
 		}
 		$handle->execute();
 
-//		$this->persistRelations($sheet, $update);
+		$this->persistRelations($sheet, $update);
 		// Commits transaction
 		$this->db->commit();
 	}
@@ -172,9 +172,9 @@ class SheetRepository extends Repository
 	 * Persists Sheet relations
 	 * @param Sheet $sheet
 	 */
-	private function persistRelations(Sheet $sheet, $update = true)
+	protected function persistRelations(Sheet $sheet, $update = true)
 	{
-		$hindranceRepository = new HindranceRepository($this->db);
+		$hindranceRepository = new HindranceRepository();
 		$hindranceRepository->persistRelations($sheet, $update);
 
 		$edgeRepository = new EdgeRepository($this->db);

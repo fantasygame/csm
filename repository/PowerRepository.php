@@ -8,6 +8,11 @@
 class PowerRepository extends Repository
 {
 
+	protected function persistRelations(Sheet $sheet, $update = true)
+	{
+		parent::persistRelations($sheet, $update, 'getPowers', 'getForSheet');
+	}
+
 	public function getAll()
 	{
 		$query = "
@@ -45,43 +50,6 @@ class PowerRepository extends Repository
 		$power = new Power($res['id'], $res['name'], $res['description']);
 
 		return $power;
-	}
-
-	/**
-	 * Persists Power relations
-	 * @param Sheet $sheet
-	 */
-	public function persistRelations(Sheet $sheet)
-	{
-		$powers = $sheet->getPowers();
-		for ($i = 0; $i < count($powers); $i++) {
-			$this->persistRelation($powers[$i], $sheet);
-		}
-	}
-
-	/**
-	 * Persists relation between Attribute and Sheet
-	 * @param Power $power
-	 * @param Sheet $sheet
-	 */
-	private function persistRelation(Power $power, Sheet $sheet)
-	{
-		$query = "
-		INSERT INTO `sheet_power` (
-			`id` ,
-			`sheet_id` ,
-			`power_id`			
-		)
-		VALUES (
-			NULL,
-			:sheet_id ,
-			:power_id
-		);
-		";
-		$handle = $this->db->prepare($query);
-		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);
-		$handle->bindParam(':power_id', $power->getId(), Database::PARAM_INT);
-		$handle->execute();
 	}
 
 	public function getForSheet(Sheet $sheet)

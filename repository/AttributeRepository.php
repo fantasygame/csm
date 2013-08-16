@@ -8,44 +8,9 @@
 class AttributeRepository extends Repository
 {
 
-	/**
-	 * Persists Attribute relations
-	 * @param Sheet $sheet
-	 */
-	public function persistRelations(Sheet $sheet)
+	protected function persistRelations(Sheet $sheet, $update = true)
 	{
-		$attributes = $sheet->getAttributes();
-		for ($i = 0; $i < count($attributes); $i++) {
-			$this->persistRelation($attributes[$i], $sheet);
-		}
-	}
-
-	/**
-	 * Persists relation between Attribute and Sheet
-	 * @param Attribute $attribute
-	 * @param Sheet $sheet
-	 */
-	private function persistRelation(Attribute $attribute, Sheet $sheet)
-	{
-		$query = "
-		INSERT INTO `sheet_attribute` (
-			`id` ,
-			`sheet_id` ,
-			`attribute_id`,
-			`value`
-		)
-		VALUES (
-			NULL,
-			:sheet_id ,
-			:attribute_id,
-			:value
-		);
-		";
-		$handle = $this->db->prepare($query);
-		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);
-		$handle->bindParam(':attribute_id', $attribute->getId(), Database::PARAM_INT);
-		$handle->bindParam(':value', $attribute->getValue(), Database::PARAM_INT);
-		$handle->execute();
+		parent::persistRelations($sheet, $update, 'getAttributes', 'getForSheet', array('value'));
 	}
 
 	public function getById($id, $value)

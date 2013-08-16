@@ -72,6 +72,26 @@ class Sheet
 		return false;
 	}
 
+	public function addAttribute(Attribute $attribute)
+	{
+		$this->attributes[] = $attribute;
+	}
+
+	public function addEdge(Edge $edge)
+	{
+		$this->edges[] = $edge;
+	}
+
+	public function addHindrance(Hindrance $hindrance)
+	{
+		$this->hindrances[] = $hindrance;
+	}
+
+	public function addPower(Power $power)
+	{
+		$this->powers[] = $power;
+	}
+
 	public function getId()
 	{
 		return $this->id;

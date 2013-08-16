@@ -8,40 +8,9 @@
 class SkillRepository extends Repository
 {
 
-	/**
-	 * Persists Skill relations
-	 * @param Sheet $sheet
-	 */
-	public function persistRelations(Sheet $sheet)
+	protected function persistRelations(Sheet $sheet, $update = true)
 	{
-		$skills = $sheet->getSkills();
-		for ($i = 0; $i < count($skills); $i++) {
-			$this->persistRelation($skills[$i], $sheet);
-		}
-	}
-
-	private function persistRelation(Skill $skill, Sheet $sheet)
-	{
-		$query = "
-		INSERT INTO `sheet_skill` (
-			`id` ,
-			`sheet_id` ,
-			`skill_id`,
-			`value`
-		)
-		VALUES (
-			NULL,
-			:sheet_id ,
-			:skill_id,
-			:value
-		);
-		";
-
-		$handle = $this->db->prepare($query);
-		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);
-		$handle->bindParam(':skill_id', $skill->getId(), Database::PARAM_INT);
-		$handle->bindParam(':value', $skill->getValue(), Database::PARAM_INT);
-		$handle->execute();
+		parent::persistRelations($sheet, $update, 'getSkills', 'getForSheet', array('value'));
 	}
 
 	public function getById($id, $value, Sheet $sheet)
