@@ -5,16 +5,8 @@
  *
  * @author PHP Summer Workshop
  */
-class PowerRepository
+class PowerRepository extends Repository
 {
-	/* @var $db Database */
-
-	private $db;
-
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-	}
 
 	public function getAll()
 	{

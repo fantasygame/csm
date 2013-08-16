@@ -5,15 +5,8 @@
  *
  * @author kuba
  */
-class BaseSkillRepository
+class BaseSkillRepository extends Repository
 {
-
-	private $db;
-
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-	}
 
 	public function getAll($orderBy = false)
 	{
@@ -46,7 +39,7 @@ class BaseSkillRepository
 		$handle->bindParam(':id', $id);
 		$handle->execute();
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
-		if(count($result) == 0) {
+		if (count($result) == 0) {
 			throw new Exception("Skill not found ($id)");
 		}
 		$res = $result[0];

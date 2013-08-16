@@ -10,31 +10,29 @@ class SheetController extends Controller
 
 	public function formAction($id = null)
 	{
-		$config = SimpleConfig::getInstance();
-		$db = $config->db;
 
-		$baseAttributeRepository = new BaseAttributeRepository($db);
+		$baseAttributeRepository = new BaseAttributeRepository();
 		$attributes = $baseAttributeRepository->getAll();
 
-		$baseSkillRepository = new BaseSkillRepository($db);
+		$baseSkillRepository = new BaseSkillRepository();
 		$skills = $baseSkillRepository->getAll('name');
 
-		$edgeRepository = new EdgeRepository($db);
+		$edgeRepository = new EdgeRepository();
 		$edges = $edgeRepository->getAll();
 
-		$hindranceRepository = new HindranceRepository($db);
+		$hindranceRepository = new HindranceRepository();
 		$hindrances = $hindranceRepository->getAll();
 
-		$powerRepository = new PowerRepository($db);
+		$powerRepository = new PowerRepository();
 		$powers = $powerRepository->getAll();
 
-		$raceRepository = new RaceRepository($db);
+		$raceRepository = new RaceRepository();
 		$races = $raceRepository->getAll();
 
-		$userRepository = new UserRepository($db);
+		$userRepository = new UserRepository();
 		$users = $userRepository->getAll();
 
-		$sheetRepository = new SheetRepository($db);
+		$sheetRepository = new SheetRepository();
 		if ($id) {
 			$sheet = $sheetRepository->getById($id);
 		} else {
@@ -46,10 +44,8 @@ class SheetController extends Controller
 
 	public function listAction()
 	{
-		$config = SimpleConfig::getInstance();
-		$db = $config->db;
 
-		$sheetRepository = new SheetRepository($db);
+		$sheetRepository = new SheetRepository();
 		$sheets = $sheetRepository->getAllSimple();
 
 		echo $this->getView()->render('list.html.twig', array('sheets' => $sheets));
@@ -57,10 +53,7 @@ class SheetController extends Controller
 
 	public function removeAction($id)
 	{
-		$config = SimpleConfig::getInstance();
-		$db = $config->db;
-		
-		$sheetRepository = new SheetRepository($db);
+		$sheetRepository = new SheetRepository();
 		$sheetRepository->remove($id);
 	}
 

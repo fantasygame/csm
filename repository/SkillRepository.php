@@ -5,16 +5,8 @@
  *
  * @author PHP Summer Workshop
  */
-class SkillRepository
+class SkillRepository extends Repository
 {
-	/* @var $db Database */
-
-	private $db;
-
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-	}
 
 	/**
 	 * Persists Skill relations

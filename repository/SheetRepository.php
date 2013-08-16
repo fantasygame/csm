@@ -5,16 +5,8 @@
  *
  * @author PHP Summer Workshop
  */
-class SheetRepository
+class SheetRepository extends Repository
 {
-	/* @var $db Database */
-
-	private $db;
-
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-	}
 
 	/**
 	 * Persists Sheet in database
@@ -24,7 +16,8 @@ class SheetRepository
 	{
 
 		if ($update) {
-			if (empty($sheet->getId())) {
+			$id = $sheet->getId();
+			if (empty($id)) {
 				throw new Exception('Cant update Sheet with empty id');
 			}
 			$query = "
@@ -80,7 +73,6 @@ class SheetRepository
 		$handle->execute();
 
 //		$this->persistRelations($sheet, $update);
-
 		// Commits transaction
 		$this->db->commit();
 	}

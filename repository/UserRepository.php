@@ -5,16 +5,8 @@
  *
  * @author kuba
  */
-class UserRepository
+class UserRepository extends Repository
 {
-	/* @var $db Database */
-
-	private $db;
-
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-	}
 
 	/**
 	 * Get all the Users

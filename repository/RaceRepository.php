@@ -5,16 +5,8 @@
  *
  * @author kuba
  */
-class RaceRepository
+class RaceRepository extends Repository
 {
-	/* @var $db Database */
-
-	private $db;
-
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-	}
 
 	/**
 	 * Get all the Races

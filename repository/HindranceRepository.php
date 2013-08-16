@@ -5,16 +5,8 @@
  *
  * @author PHP Summer Workshop
  */
-class HindranceRepository
+class HindranceRepository extends Repository
 {
-	/* @var $db Database */
-
-	private $db;
-
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-	}
 
 	/**
 	 * Persists Hindrance relations
@@ -62,7 +54,7 @@ class HindranceRepository
 			);
 			";
 		}
-		
+
 
 		$handle = $this->db->prepare($query);
 		$handle->bindParam(':sheet_id', $sheet->getId(), Database::PARAM_INT);

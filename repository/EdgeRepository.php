@@ -5,16 +5,8 @@
  *
  * @author PHP Summer Workshop
  */
-class EdgeRepository
+class EdgeRepository extends Repository
 {
-	/* @var $db Database */
-
-	private $db;
-
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-	}
 
 	/**
 	 * Persists Edge relations
