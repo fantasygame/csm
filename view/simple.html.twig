@@ -1,0 +1,30 @@
+{% extends "main.html.twig" %}
+
+{% block title%}Drukuj{%endblock%}
+
+{% block css %}
+    <link rel="stylesheet" href="resource/css/print.css" type="text/css"/>
+{% endblock %}
+    {% block body %}
+<div id="lol">
+ <br>{{sheet.getName}}
+ <br>{{sheet.getRace.getName}}
+ <br>{{sheet.getAppearance}}
+ <br>{{sheet.getArchetype}}
+ <br>{{sheet.getDescription}}
+ <br>{{sheet.getExp}}
+ <br>{% for edge in sheet.getEdges %}
+ {{edge.getName}}
+ {%endfor%}
+ <br>{% for hindrance in sheet.getHindrances %}
+ {{hindrance.getName}}
+ {%endfor%}
+ <br>{% for skill in sheet.getSkills %}
+ {{skill.getName}}
+ {%if skill.getValue <= 12%}
+ k{{skill.getValue}} 
+ {%else%}k12+{{skill.getValue - 12}}{%endif%}
+ {%endfor%}
+        
+</div>
+    {% endblock %}
