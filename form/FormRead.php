@@ -16,12 +16,12 @@ class FormRead {
         $sheet = new Sheet();
 
         $name = $_POST['name'];
-        $sheet->setName($name);//imię postaci
-        
+        $sheet->setName($name); //imię postaci
+
         $raceRep = new RaceRepository();
         $race = $raceRep->getById($_POST['race']);
         $sheet->setRace($race);
-        
+
 //id rasy
         $appearance = $_POST['appearance'];
         $sheet->setAppearance($appearance);
@@ -52,33 +52,33 @@ class FormRead {
             $powers[] = $rep->getById($value);
         }
         $sheet->setPowers($powers);
-        
+
         $attributes = array();
         foreach ($_POST['attributes'] as $key => $value) {
             $rep = new AttributeRepository();
-            $attributes[] = $rep->getById($key, $value); 
+            $attributes[] = $rep->getById($key, $value);
         }
         $sheet->setAttributes($attributes);
 
         $skills = array();
-        foreach ($_POST['skills'] as $key => $value){
+        foreach ($_POST['skills'] as $key => $value) {
             $rep = new SkillRepository();
             $skills[] = $rep->getById($key, $value, $sheet);
         }
         $sheet->setSkills($skills);
 
-        
 
-        $usRep = new UserRepository();       
+
+        $usRep = new UserRepository();
         $user = $usRep->getById($_POST['user']);
         $sheet->setUser($user);
-        
+
         $exp = $_POST['exp'];
         $sheet->setExp($exp);
 
 
 
-                
+
 
         return $sheet;
     }
