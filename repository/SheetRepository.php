@@ -69,15 +69,23 @@ class SheetRepository extends Repository
 
 		$this->db->beginTransaction();
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(':user_id', $sheet->getUser()->getId(), Database::PARAM_INT);
-		$handle->bindParam(':name', $sheet->getName(), Database::PARAM_STR);
-		$handle->bindParam(':race_id', $sheet->getRace()->getId(), Database::PARAM_INT);
-		$handle->bindParam(':appearance', $sheet->getAppearance(), Database::PARAM_STR);
-		$handle->bindParam(':archetype', $sheet->getArchetype(), Database::PARAM_STR);
-		$handle->bindParam(':description', $sheet->getDescription(), Database::PARAM_STR);
-		$handle->bindParam(':exp', $sheet->getExp(), Database::PARAM_STR);
+		$userId = $sheet->getUser()->getId();
+		$handle->bindParam(':user_id', $userId, Database::PARAM_INT);
+		$name = $sheet->getName();
+		$handle->bindParam(':name', $name, Database::PARAM_STR);
+		$raceId = $sheet->getRace()->getId();
+		$handle->bindParam(':race_id', $raceId, Database::PARAM_INT);
+		$appearance = $sheet->getAppearance();
+		$handle->bindParam(':appearance', $appearance, Database::PARAM_STR);
+		$archetype = $sheet->getArchetype();
+		$handle->bindParam(':archetype', $archetype, Database::PARAM_STR);
+		$description = $sheet->getDescription();
+		$handle->bindParam(':description', $description, Database::PARAM_STR);
+		$exp = $sheet->getExp();
+		$handle->bindParam(':exp', $exp, Database::PARAM_STR);
 		if ($update) {
-			$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
+			$id = $sheet->getId();
+			$handle->bindParam(':id', $id, Database::PARAM_INT);
 		}
 		$handle->execute();
 		if (!$update) {

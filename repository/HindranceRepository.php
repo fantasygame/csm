@@ -8,7 +8,7 @@
 class HindranceRepository extends Repository
 {
 
-	protected function persistRelations(Sheet $sheet, $update = true)
+	public function persistRelations(Sheet $sheet, $update = true)
 	{
 		parent::relations($sheet, $update, 'getHindrances', 'getForSheet');
 	}
@@ -65,7 +65,8 @@ class HindranceRepository extends Repository
 		";
 
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
+		$id = $sheet->getId();
+		$handle->bindParam(':id', $id, Database::PARAM_INT);
 		$handle->execute();
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
 

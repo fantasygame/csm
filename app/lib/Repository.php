@@ -84,8 +84,10 @@ abstract class Repository
 		AND `$name2` = :$name2
 		";
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(":$name1", $object1->getId(), Database::PARAM_INT);
-		$handle->bindParam(":$name2", $object2->getId(), Database::PARAM_INT);
+		$obj1Id = $object1->getId();
+		$handle->bindParam(":$name1", $obj1Id, Database::PARAM_INT);
+		$obj2Id = $object2->getId();
+		$handle->bindParam(":$name2", $obj2Id, Database::PARAM_INT);
 		$handle->execute();
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
 		if ($result[0]['count'] > 0) {
@@ -113,8 +115,10 @@ abstract class Repository
 		}
 		
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(":$name1", $object1->getId(), Database::PARAM_INT);
-		$handle->bindParam(":$name2", $object2->getId(), Database::PARAM_INT);
+		$obj1Id = $object1->getId();
+		$handle->bindParam(":$name1", $obj1Id, Database::PARAM_INT);
+		$obj2Id = $object2->getId();
+		$handle->bindParam(":$name2", $obj2Id, Database::PARAM_INT);
 		foreach ($fields as $name => $value) {
 			$handle->bindParam(":$name", $value);
 		}
@@ -138,8 +142,10 @@ abstract class Repository
 		AND `$name2` = :$name2
 		";
 		$handle = $this->db->prepare($query);
-		$handle->bindParam(":$name1", $object1->getId(), Database::PARAM_INT);
-		$handle->bindParam(":$name2", $object2->getId(), Database::PARAM_INT);
+		$obj1Id = $object1->getId();
+		$handle->bindParam(":$name1", $obj1Id, Database::PARAM_INT);
+		$obj2Id = $object2->getId();
+		$handle->bindParam(":$name2", $obj2Id, Database::PARAM_INT);
 		$handle->execute();
 	}
 
