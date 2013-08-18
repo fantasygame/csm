@@ -22,7 +22,7 @@ abstract class Repository
 		if (!$update) {
 			$objects = $mainObject->$methodNameMain();
 			for ($i = 0; $i < count($objects); $i++) {
-				$this->addRelation($objects[$i], $mainObject, $update);
+				$this->addRelation($objects[$i], $mainObject, $fields);
 			}
 		} else {
 			$objectsUpdate = $mainObject->$methodNameMain();
@@ -111,8 +111,7 @@ abstract class Repository
 			}
 			$query = "$query1$query2);";
 		}
-
-
+		
 		$handle = $this->db->prepare($query);
 		$handle->bindParam(":$name1", $object1->getId(), Database::PARAM_INT);
 		$handle->bindParam(":$name2", $object2->getId(), Database::PARAM_INT);

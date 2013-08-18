@@ -44,13 +44,11 @@ class SheetController extends Controller
 
 	public function formAction()
 	{
-		$config = SimpleConfig::getInstance();
-		$request = $config->request;
-
-		echo '<pre>';
-		print_r($request->getPost());
-		echo '</pre>';
-		exit();
+		$form = new SheetForm();
+		$sheet = $form->read();
+		
+		$sheetRepository = new SheetRepository();
+		$sheetRepository->persist($sheet, false);
 	}
 
 	public function listAction()

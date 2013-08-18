@@ -58,7 +58,6 @@ class SheetRepository extends Repository
 		}
 
 		$this->db->beginTransaction();
-
 		$handle = $this->db->prepare($query);
 		$handle->bindParam(':user_id', $sheet->getUser()->getId(), Database::PARAM_INT);
 		$handle->bindParam(':name', $sheet->getName(), Database::PARAM_STR);
@@ -71,6 +70,9 @@ class SheetRepository extends Repository
 			$handle->bindParam(':id', $sheet->getId(), Database::PARAM_INT);
 		}
 		$handle->execute();
+		if (!$update) {
+			$sheet->setId($this->db->lastInsertId());
+		}
 
 		$this->persistRelations($sheet, $update);
 		// Commits transaction
