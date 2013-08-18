@@ -56,7 +56,7 @@ class SimpleConfig implements ArrayAccess, Countable, IteratorAggregate
      * @author digit
      * @since Mon Jan 18 05:50:43 GMT 2010 
      */
-    public function setFile($filePath) 
+    public static function setFile($filePath) 
     {
         /* make sure instance doesn't exist yet */
         if (self::$_instance !== null) {

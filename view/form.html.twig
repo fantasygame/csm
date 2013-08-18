@@ -5,11 +5,11 @@
 
 
 {% block body %}
-<form method="post" action="form.php">
-	
+<form method="post" action="/csm/sheet/form">
+	<input type="hidden" name="id" value="{{ sheet.getId() }}" />
 	<div id="card">
 		<div id="name">
-			<input type="text" name="Name" value="{{ sheet.getName() }}" />
+			<input type="text" name="name" value="{{ sheet.getName() }}" />
 		</div>
 		<div id="user">
 				<select name="user">

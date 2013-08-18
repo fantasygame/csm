@@ -10,7 +10,7 @@ class HindranceRepository extends Repository
 
 	protected function persistRelations(Sheet $sheet, $update = true)
 	{
-		parent::persistRelations($sheet, $update, 'getHindrances', 'getForSheet');
+		parent::relations($sheet, $update, 'getHindrances', 'getForSheet');
 	}
 
 	public function getAll()

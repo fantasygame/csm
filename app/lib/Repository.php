@@ -17,7 +17,7 @@ abstract class Repository
 		$this->db = $config->db;
 	}
 
-	protected function persistRelations($mainObject, $update, $methodNameMain, $methodName, $fields = array())
+	protected function relations($mainObject, $update, $methodNameMain, $methodName, $fields = array())
 	{
 		if (!$update) {
 			$objects = $mainObject->$methodNameMain();

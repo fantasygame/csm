@@ -45,8 +45,17 @@ class SheetController extends Controller
 
 	public function formAction()
 	{
+		
 		$form = new SheetForm();
 		$sheet = $form->read();
+		echo '<pre>';
+		print_r($sheet);
+		echo '</pre>';
+		exit();
+		echo '<pre>';
+		print_r($sheet);
+		echo '</pre>';
+		exit();
 
 		$sheetRepository = new SheetRepository();
 		if ($sheet->getId()) {

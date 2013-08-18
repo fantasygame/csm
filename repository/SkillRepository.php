@@ -10,7 +10,7 @@ class SkillRepository extends Repository
 
 	protected function persistRelations(Sheet $sheet, $update = true)
 	{
-		parent::persistRelations($sheet, $update, 'getSkills', 'getForSheet', array('value'));
+		parent::relations($sheet, $update, 'getSkills', 'getForSheet', array('value'));
 	}
 
 	public function getById($id, $value, Sheet $sheet)

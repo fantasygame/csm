@@ -10,7 +10,7 @@ class EdgeRepository extends Repository
 
 	protected function persistRelations(Sheet $sheet, $update = true)
 	{
-		parent::persistRelations($sheet, $update, 'getEdges', 'getForSheet');
+		parent::relations($sheet, $update, 'getEdges', 'getForSheet');
 	}
 
 	/**

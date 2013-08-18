@@ -10,7 +10,7 @@ class AttributeRepository extends Repository
 
 	protected function persistRelations(Sheet $sheet, $update = true)
 	{
-		parent::persistRelations($sheet, $update, 'getAttributes', 'getForSheet', array('value'));
+		parent::relations($sheet, $update, 'getAttributes', 'getForSheet', array('value'));
 	}
 
 	public function getById($id, $value)
