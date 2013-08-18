@@ -1,1 +1,63 @@
-Hello World!
+{% extends "base.html.twig" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/csm/resource/css/print.css" />
+{% endblock %}
+
+{% block body %}
+<div id="card">
+	<div id="name" class="handWrite">
+		{{ sheet.getName() }}
+	</div>
+	<div id="user" class="handWrite">
+		{{ sheet.getUser().getName() }}
+	</div>
+	<div id="appearance" class="handWrite">
+		( {{ sheet.getRace().getName() }} )  {{ sheet.getAppearance() }}
+	</div>
+	<div id="archetype" class="handWrite">
+		{{ sheet.getArchetype() }}
+	</div>
+	<div id="exp" class="handWrite">
+		{{ sheet.getExp() }}
+	</div>
+	<div id="attributes">
+	{% set dice = [4, 6, 8, 10] %}
+	{% for attribute in sheet.getAttributes() %}
+		<div class="attribute"><u>{{ attribute.getName() }}</u>
+		{% for die in dice %}
+			<img src="/csm/resource/image/dice{% if attribute.getValue() == die %}/checked{% endif %}/a{{ die }}.png"/>
+		{% endfor %}
+		<img src="/csm/resource/image/dice{% if attribute.getValue() >= 12 %}/checked{% endif %}/a12.png"/>{% if attribute.getValue() > 12 %}+{{attribute.getValue() - 12}}{% endif %}
+		</div>
+		{% for skill in sheet.getSkills() %}
+		{% if attribute.getId() == skill.getAttribute().getId() %}
+			<div class="skill">
+				{{ skill.getName() }}
+				{% for die in dice %}
+			<img src="/csm/resource/image/dice{% if skill.getValue() == die %}/checked{% endif %}/s{{ die }}.png"/>
+		{% endfor %}
+		<img src="/csm/resource/image/dice{% if skill.getValue() >= 12 %}/checked{% endif %}/s12.png"/>{% if skill.getValue() > 12 %}+{{skill.getValue() - 12}}{% endif %}
+			</div>
+		{% endif %}
+		{% endfor %}<br />
+	{% endfor %}
+		
+	</div>
+	<div id="edges" class="handWrite">
+	{% for edge in sheet.getEdges() %}
+		{{ edge.getName() }} <br />
+	{% endfor %}	
+	</div>
+	<div id="hindrances" class="handWrite">
+	{% for hindrance in sheet.getHindrances() %}
+		{{ hindrance.getName() }} <br />
+	{% endfor %}
+	</div>
+	<div id="powers" class="handWrite">
+	{% for power in sheet.getPowers() %}
+		{{ power.getName() }} <br />
+	{% endfor %}
+	</div>
+</div>
+{% endblock %}
