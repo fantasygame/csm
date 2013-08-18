@@ -40,28 +40,28 @@
 		<div id="attributes">
 				{% for attribute in attributes %}
 				<b>{{ attribute.getName() }}
-					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="4" checked="checked" {% if sheet.getAttribute(attribute.getId()).getValue() == 4 %} checked="checked" {% endif %}> <img src="/csm/resource/character_sheet/dice/a4.png" />
-					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="6" {% if sheet.getAttribute(attribute.getId()).getValue() == 6 %} checked="checked" {% endif %} > <img src="/csm/resource/character_sheet/dice/a6.png" />
-					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="8" {% if sheet.getAttribute(attribute.getId()).getValue() == 8 %} checked="checked" {% endif %}> <img src="/csm/resource/character_sheet/dice/a8.png" />
-					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="10" {% if sheet.getAttribute(attribute.getId()).getValue() == 10 %} checked="checked" {% endif %}> <img src="/csm/resource/character_sheet/dice/a10.png" />
-					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="12" {% if sheet.getAttribute(attribute.getId()).getValue() == 12 %} checked="checked" {% endif %}> <img src="/csm/resource/character_sheet/dice/a12.png" />
-					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="13" {% if sheet.getAttribute(attribute.getId()).getValue() == 13 %} checked="checked" {% endif %}> <img src="/csm/resource/character_sheet/dice/a12.png" />+1
-					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="14" {% if sheet.getAttribute(attribute.getId()).getValue() == 14 %} checked="checked" {% endif %}> <img src="/csm/resource/character_sheet/dice/a12.png" />+2
-					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="15" {% if sheet.getAttribute(attribute.getId()).getValue() == 15 %} checked="checked" {% endif %} > <img src="/csm/resource/character_sheet/dice/a12.png" />+3
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="4" checked="checked" {% if sheet.getAttribute(attribute.getId()).getValue() == 4 %} checked="checked" {% endif %}> <img src="/csm/resource/image/dice/a4.png" />
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="6" {% if sheet.getAttribute(attribute.getId()).getValue() == 6 %} checked="checked" {% endif %} > <img src="/csm/resource/image/dice/a6.png" />
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="8" {% if sheet.getAttribute(attribute.getId()).getValue() == 8 %} checked="checked" {% endif %}> <img src="/csm/resource/image/dice/a8.png" />
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="10" {% if sheet.getAttribute(attribute.getId()).getValue() == 10 %} checked="checked" {% endif %}> <img src="/csm/resource/image/dice/a10.png" />
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="12" {% if sheet.getAttribute(attribute.getId()).getValue() == 12 %} checked="checked" {% endif %}> <img src="/csm/resource/image/dice/a12.png" />
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="13" {% if sheet.getAttribute(attribute.getId()).getValue() == 13 %} checked="checked" {% endif %}> <img src="/csm/resource/image/dice/a12.png" />+1
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="14" {% if sheet.getAttribute(attribute.getId()).getValue() == 14 %} checked="checked" {% endif %}> <img src="/csm/resource/image/dice/a12.png" />+2
+					<input type="radio" name="attributes[{{ attribute.getId() }}]" value="15" {% if sheet.getAttribute(attribute.getId()).getValue() == 15 %} checked="checked" {% endif %} > <img src="/csm/resource/image/dice/a12.png" />+3
 				</b><br />
 				<div id="skills">
                 {% for skill in skills %}
 				{% if attribute.getId() == skill.getAttribute().getId() %}
 				<i>{{skill.getName()}}
-					<input type="radio" name="skills[{{ skill.getId() }}]" value="0" checked="checked" {% if sheet.getSkill(skill.getId()).getValue() == 0 %} checked="checked" {% endif %} ><img src="/csm/resource/character_sheet/dice/s4.png" />n
-					<input type="radio" name="skills[{{ skill.getId() }}]" value="4" {% if sheet.getSkill(skill.getId()).getValue() == 4 %} checked="checked" {% endif %} > <img src="/csm/resource/character_sheet/dice/s4.png" />
-					<input type="radio" name="skills[{{ skill.getId() }}]" value="6" {% if sheet.getSkill(skill.getId()).getValue() == 6 %} checked="checked" {% endif %} > <img src="/csm/resource/character_sheet/dice/s6.png" />
-					<input type="radio" name="skills[{{ skill.getId() }}]" value="8" {% if sheet.getSkill(skill.getId()).getValue() == 8 %} checked="checked" {% endif %} > <img src="/csm/resource/character_sheet/dice/s8.png" />
-					<input type="radio" name="skills[{{ skill.getId() }}]" value="10" {% if sheet.getSkill(skill.getId()).getValue() == 10 %} checked="checked" {% endif %} > <img src="/csm/resource/character_sheet/dice/s10.png" />
-					<input type="radio" name="skills[{{ skill.getId() }}]" value="12" {% if sheet.getSkill(skill.getId()).getValue() == 12 %} checked="checked" {% endif %} > <img src="/csm/resource/character_sheet/dice/s12.png" />
-					<input type="radio" name="skills[{{ skill.getId() }}]" value="13" {% if sheet.getSkill(skill.getId()).getValue() == 13 %} checked="checked" {% endif %} > <img src="/csm/resource/character_sheet/dice/s12.png" />+1
-					<input type="radio" name="skills[{{ skill.getId() }}]" value="14" {% if sheet.getSkill(skill.getId()).getValue() == 14 %} checked="checked" {% endif %} > <img src="/csm/resource/character_sheet/dice/s12.png" />+2
-					<input type="radio" name="skills[{{ skill.getId() }}]" value="15" {% if sheet.getSkill(skill.getId()).getValue() == 15 %} checked="checked" {% endif %} > <img src="/csm/resource/character_sheet/dice/s12.png" />+3
+					<input type="radio" name="skills[{{ skill.getId() }}]" value="0" checked="checked" {% if sheet.getSkill(skill.getId()).getValue() == 0 %} checked="checked" {% endif %} >nw | 
+					<input type="radio" name="skills[{{ skill.getId() }}]" value="4" {% if sheet.getSkill(skill.getId()).getValue() == 4 %} checked="checked" {% endif %} > <img src="/csm/resource/image/dice/s4.png" /> | 
+					<input type="radio" name="skills[{{ skill.getId() }}]" value="6" {% if sheet.getSkill(skill.getId()).getValue() == 6 %} checked="checked" {% endif %} > <img src="/csm/resource/image/dice/s6.png" /> | 
+					<input type="radio" name="skills[{{ skill.getId() }}]" value="8" {% if sheet.getSkill(skill.getId()).getValue() == 8 %} checked="checked" {% endif %} > <img src="/csm/resource/image/dice/s8.png" /> | 
+					<input type="radio" name="skills[{{ skill.getId() }}]" value="10" {% if sheet.getSkill(skill.getId()).getValue() == 10 %} checked="checked" {% endif %} > <img src="/csm/resource/image/dice/s10.png" /> | 
+					<input type="radio" name="skills[{{ skill.getId() }}]" value="12" {% if sheet.getSkill(skill.getId()).getValue() == 12 %} checked="checked" {% endif %} > <img src="/csm/resource/image/dice/s12.png" /> | 
+					<input type="radio" name="skills[{{ skill.getId() }}]" value="13" {% if sheet.getSkill(skill.getId()).getValue() == 13 %} checked="checked" {% endif %} > <img src="/csm/resource/image/dice/s12.png" />+1 | 
+					<input type="radio" name="skills[{{ skill.getId() }}]" value="14" {% if sheet.getSkill(skill.getId()).getValue() == 14 %} checked="checked" {% endif %} > <img src="/csm/resource/image/dice/s12.png" />+2 | 
+					<input type="radio" name="skills[{{ skill.getId() }}]" value="15" {% if sheet.getSkill(skill.getId()).getValue() == 15 %} checked="checked" {% endif %} > <img src="/csm/resource/image/dice/s12.png" />+3
 				</i><br />
 				{% endif %}
 				{%endfor%}
