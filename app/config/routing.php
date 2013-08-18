@@ -2,8 +2,8 @@
 
 $routes = array(
 	'default' => array(
-		'controller' => 'DefaultController',
-		'defaultAction' => 'index',
+		'controller' => 'SheetController',
+		'defaultAction' => 'list',
 		'actions' => array(),
 	),
 	'sheet' => array(

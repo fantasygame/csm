@@ -55,7 +55,7 @@ class SheetController extends Controller
 		} else {
 			$sheetRepository->insert($sheet);
 		}
-		return new Response(new Redirect('/csm/sheet/show/' . $sheet->getId()));
+		return new Response(new Redirect('/csm/sheet/list/'));
 	}
 
 	public function printAction($id)
