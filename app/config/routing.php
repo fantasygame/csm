@@ -12,6 +12,7 @@ $routes = array(
 			'form' => array(),
 			'show' => array('id'),
 			'list' => array(),
+			'simple' => array('id'),
 			'remove' => array('id'),
 		),
 		'defaultAction' => 'list'

@@ -45,13 +45,15 @@ class SheetController extends Controller
 
 	public function formAction()
 	{
-		$config = SimpleConfig::getInstance();
-		$request = $config->request;
+		$form = new SheetForm();
+		$sheet = $form->read();
 
-		echo '<pre>';
-		print_r($request->getPost());
-		echo '</pre>';
-		exit();
+		$sheetRepository = new SheetRepository();
+		if ($sheet->getId()) {
+			$sheetRepository->update($sheet);
+		} else {
+			$sheetRepository->insert($sheet);
+		}
 	}
 
 	public function listAction()
@@ -67,6 +69,13 @@ class SheetController extends Controller
 	{
 		$sheetRepository = new SheetRepository();
 		$sheetRepository->remove($id);
+	}
+
+	public function simpleAction($id)
+	{
+		$rep = new SheetRepository();
+		$sheet = $rep->getById($id);
+		echo $this->getView()->render('simple.html.twig', array("sheet" => $sheet));
 	}
 
 }
