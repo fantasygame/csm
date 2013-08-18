@@ -55,6 +55,30 @@ class SheetController extends Controller
 			$sheetRepository->insert($sheet);
 		}
 	}
+	
+	public function printAction($id)
+	{
+		$sheetRepository = new SheetRepository();
+		$sheet = $sheetRepository->getById($id);
+		$skillRepository = new BaseSkillRepository;
+		$baseSkills = $skillRepository->getAll('name');
+		
+		$skills = $sheet->getSkills();
+		
+		for ($i = 0; $i < count($baseSkills); $i++) {
+			$baseSkill = $baseSkills[$i];
+			for ($j = 0; $j < count($skills); $j++) {
+				$skill = $skills[$j];
+				if ($baseSkill->getId() == $skill->getId()) {
+					$baseSkills[$i] = $skill;
+				}
+			}
+		}
+		
+		$sheet->setSkills($baseSkills);
+		
+		echo $this->getView()->render('print.html.twig', array('sheet' => $sheet));
+	}
 
 	public function listAction()
 	{

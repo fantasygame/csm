@@ -1,0 +1,91 @@
+@font-face {
+  font-family: "MarkerScript";
+  font-weight: normal;
+  font-style: normal;
+  src: url('/csm/resource/font/MarkerScript.ttf');
+}
+
+#card { 
+	font-family: Arial;
+	font-size: 12px;
+	background-image: url('/csm/resource/character_sheet/sw_sheet.jpg');
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 210mm;
+	height: 297mm;
+/*	background-position: 10mm 10mm;*/
+}
+
+.handWrite {
+	font-family: MarkerScript;
+}
+
+#user {
+	position: absolute; left: 5mm; top: 5mm;
+}
+
+#name {
+	position: absolute; left: 85mm; top: 13mm;
+	font-size: 30px;
+}
+
+#race {
+	position: absolute; left: 140mm; top: 25mm;
+}
+
+#appearance {
+	position: absolute; left: 93mm; top: 37mm;
+}
+
+#archetype {
+	position: absolute; left: 97mm; top: 28mm;
+}
+
+#description {
+	position: absolute; left: 135mm; top: 34mm;
+}
+
+#exp {
+	position: absolute; left: 174mm; top: 90mm;
+	font-size: 30px;
+	
+}
+
+#attributes {
+	font-size: 16px;
+	font-weight: bold;
+	position: absolute; left: 15mm; top: 50mm;
+}
+
+.attribute {
+	text-shadow: 2px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+
+.skill {
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 5.1mm;
+}
+
+#edges {
+	position: absolute; left: 77mm; top: 111mm;
+	font-size: 10px;
+	line-height: 5.2mm;
+}
+
+#hindrances {
+	position: absolute; left: 77mm; top: 181mm;
+	font-size: 10px;
+	line-height: 5.2mm;
+}
+
+#powers {
+	position: absolute; left: 77mm; top: 223mm;
+	font-size: 10px;
+	line-height: 5.2mm;
+}
+
