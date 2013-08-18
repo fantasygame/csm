@@ -41,6 +41,7 @@ class SheetController extends Controller
 
 		echo $this->getView()->render('form.html.twig', array('attributes' => $attributes, 'skills' => $skills, 'edges' => $edges, 'hindrances' => $hindrances, 'powers' => $powers, 'races' => $races, 'users' => $users, 'sheet' => $sheet));
 	}
+	
 
 	public function formAction()
 	{
