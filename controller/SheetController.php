@@ -46,9 +46,13 @@ class SheetController extends Controller
 	{
 		$form = new SheetForm();
 		$sheet = $form->read();
-		
+
 		$sheetRepository = new SheetRepository();
-		$sheetRepository->persist($sheet, false);
+		if ($sheet->getId()) {
+			$sheetRepository->update($sheet);
+		} else {
+			$sheetRepository->insert($sheet);
+		}
 	}
 
 	public function listAction()
@@ -65,12 +69,13 @@ class SheetController extends Controller
 		$sheetRepository = new SheetRepository();
 		$sheetRepository->remove($id);
 	}
-        
-        public function simpleAction($id) {
-            $rep = new SheetRepository();
-            $sheet = $rep->getById($id);
-            echo $this->getView()->render('simple.html.twig', array("sheet" => $sheet));
-        }
+
+	public function simpleAction($id)
+	{
+		$rep = new SheetRepository();
+		$sheet = $rep->getById($id);
+		echo $this->getView()->render('simple.html.twig', array("sheet" => $sheet));
+	}
 
 }
 

@@ -8,11 +8,21 @@
 class SheetRepository extends Repository
 {
 
+	public function insert(Sheet $sheet)
+	{
+		$this->persist($sheet, false);
+	}
+
+	public function update(Sheet $sheet)
+	{
+		$this->persist($sheet, true);
+	}
+
 	/**
 	 * Persists Sheet in database
 	 * @param Sheet $sheet
 	 */
-	public function persist(Sheet $sheet, $update = true)
+	protected function persist(Sheet $sheet, $update = true)
 	{
 
 		if ($update) {

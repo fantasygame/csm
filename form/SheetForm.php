@@ -19,6 +19,8 @@ class SheetForm extends Form
 		$post = $config->request->getPost();
 		$sheet = new Sheet();
 
+		$sheet->setId($post['id']);
+
 		$name = $post['name'];
 		$sheet->setName($name);
 
