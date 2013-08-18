@@ -75,7 +75,8 @@ class Router
 			}
 		}
 
-		$reflection->invokeArgs($controller, $parameters);
+		return $reflection->invokeArgs($controller, $parameters);
+		
 	}
 
 }

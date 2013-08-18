@@ -16,7 +16,8 @@ $config['request'] = $request;
 $router = new Router($config['routing_file']);
 
 try {
-	$router->route($request);
+	$response = $router->route($request);
+	$response->resolve();
 } catch (Exception $e) {
 	if ($config['environment'] == 'production') {
 		header("HTTP/1.0 404 Not Found");

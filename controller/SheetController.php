@@ -39,13 +39,13 @@ class SheetController extends Controller
 			$sheet = null;
 		}
 
-		echo $this->getView()->render('form.html.twig', array('attributes' => $attributes, 'skills' => $skills, 'edges' => $edges, 'hindrances' => $hindrances, 'powers' => $powers, 'races' => $races, 'users' => $users, 'sheet' => $sheet));
+		$content = $this->getView()->render('form.html.twig', array('attributes' => $attributes, 'skills' => $skills, 'edges' => $edges, 'hindrances' => $hindrances, 'powers' => $powers, 'races' => $races, 'users' => $users, 'sheet' => $sheet));
+		return new Response($content);
 	}
-	
 
 	public function formAction()
 	{
-		
+
 		$form = new SheetForm();
 		$sheet = $form->read();
 
@@ -55,17 +55,18 @@ class SheetController extends Controller
 		} else {
 			$sheetRepository->insert($sheet);
 		}
+		return new Response(new Redirect('/csm/sheet/show/' . $sheet->getId()));
 	}
-	
+
 	public function printAction($id)
 	{
 		$sheetRepository = new SheetRepository();
 		$sheet = $sheetRepository->getById($id);
 		$skillRepository = new BaseSkillRepository;
 		$baseSkills = $skillRepository->getAll('name');
-		
+
 		$skills = $sheet->getSkills();
-		
+
 		for ($i = 0; $i < count($baseSkills); $i++) {
 			$baseSkill = $baseSkills[$i];
 			for ($j = 0; $j < count($skills); $j++) {
@@ -75,10 +76,11 @@ class SheetController extends Controller
 				}
 			}
 		}
-		
+
 		$sheet->setSkills($baseSkills);
-		
-		echo $this->getView()->render('print.html.twig', array('sheet' => $sheet));
+
+		$content = $this->getView()->render('print.html.twig', array('sheet' => $sheet));
+		return new Response($content);
 	}
 
 	public function listAction()
@@ -87,20 +89,23 @@ class SheetController extends Controller
 		$sheetRepository = new SheetRepository();
 		$sheets = $sheetRepository->getAllSimple();
 
-		echo $this->getView()->render('list.html.twig', array('sheets' => $sheets));
+		$content = $this->getView()->render('list.html.twig', array('sheets' => $sheets));
+		return new Response($content);
 	}
 
 	public function removeAction($id)
 	{
 		$sheetRepository = new SheetRepository();
 		$sheetRepository->remove($id);
+		return new Response(new Redirect('/csm/sheet/list'));
 	}
 
 	public function simpleAction($id)
 	{
 		$rep = new SheetRepository();
 		$sheet = $rep->getById($id);
-		echo $this->getView()->render('simple.html.twig', array("sheet" => $sheet));
+		$content = $this->getView()->render('simple.html.twig', array("sheet" => $sheet));
+		return new Response($content);
 	}
 
 }

@@ -2,7 +2,7 @@
 
 {% block css %}
 {{ parent() }}
-<link rel="stylesheet" type="text/css" href="./resource/css/gridtable.css" />
+<link rel="stylesheet" type="text/css" href="/csm/resource/css/gridtable.css" />
 {% endblock %}
 
 {% block body %}
@@ -12,7 +12,7 @@
 		<th>Imię postaci</th>
 		<th>Archetyp</th>
 		<th>Exp</th>
-		<th colspan="2"></th>
+		<th colspan="3"><button>Nowa Karta</button></th>
 	</tr>
 {% for sheet in sheets %}
 	<tr>
@@ -20,8 +20,9 @@
 		<td>{{ sheet.getName() }}</td>
 		<td>{{ sheet.getArchetype() }}</td>
 		<td>{{ sheet.getExp() }}</td>
-		<td><a href="sheet/show/{{ sheet.getId() }}"><button>Edytuj</button></a></td>
-		<td><a href="sheet/remove/{{ sheet.getId() }}"><button>Usuń</button></a></td>
+		<td><a href="/csm/sheet/show/{{ sheet.getId() }}"><button>Edytuj</button></a></td>
+		<td><a href="/csm/sheet/print/{{ sheet.getId() }}"><button>Drukuj</button></a></td>
+		<td><a href="/csm/sheet/remove/{{ sheet.getId() }}"><button>Usuń</button></a></td>
 	</tr>
 {% endfor %}
 </table>
