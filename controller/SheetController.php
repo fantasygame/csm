@@ -55,6 +55,14 @@ class SheetController extends Controller
 			$sheetRepository->insert($sheet);
 		}
 	}
+	
+	public function printAction($id)
+	{
+		$sheetReposytory = new SheetRepository();
+		$sheet = $sheetReposytory->getById($id);
+		
+		echo $this->getView()->render('print.html.twig', array('sheet' => $sheet));
+	}
 
 	public function listAction()
 	{

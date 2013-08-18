@@ -14,6 +14,7 @@ $routes = array(
 			'list' => array(),
 			'simple' => array('id'),
 			'remove' => array('id'),
+			'print' => array('id'),
 		),
 		'defaultAction' => 'list'
 	),
