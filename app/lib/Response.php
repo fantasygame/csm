@@ -21,6 +21,8 @@ class Response
 			echo $this->content;
 		} else if (get_class($this->content) == 'Redirect') {
 			$this->content->go();
+		} else if (get_class($this->content) == 'Printer') {
+			$this->content->go();
 		} else {
 			throw new Exception('Unknown response type');
 		}

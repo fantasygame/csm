@@ -185,7 +185,6 @@ class SheetRepository extends Repository
 	public function remove($id)
 	{
 		//TODO
-		echo "Sheet $id removed";
 	}
 
 	/**
