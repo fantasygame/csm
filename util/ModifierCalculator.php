@@ -10,20 +10,6 @@ class ModifierCalculator
 
 	public function calculate(Sheet &$sheet)
 	{
-		// toughness
-		$vigor = $sheet->getAttribute(4);
-		$toughness = floor($vigor->getValue() / 2) + 2;
-		$sheet->setToughness($toughness);
-
-		// parry
-		$fight = $sheet->getSkill(1);
-		if ($fight && method_exists($fight, 'getValue')) {
-			$fightValue = $fight->getValue();
-		} else {
-			$fightValue = 0;
-		}
-		$parry = floor($fightValue / 2) + 2;
-		$sheet->setParry($parry);
 
 		$edges = $sheet->getEdges();
 		for ($i = 0; $i < count($edges); $i++) {
@@ -48,6 +34,21 @@ class ModifierCalculator
 		for ($i = 0; $i < count($modifiers); $i++) {
 			$this->calculateModifier($modifiers[$i], $sheet);
 		}
+		
+		// toughness
+		$vigor = $sheet->getAttribute(4);
+		$toughness = floor($vigor->getValue() / 2) + 2;
+		$sheet->setToughness($sheet->getToughness() + $toughness);
+		
+		// parry
+		$fight = $sheet->getSkill(1);
+		if ($fight && method_exists($fight, 'getValue')) {
+			$fightValue = $fight->getValue();
+		} else {
+			$fightValue = 0;
+		}
+		$parry = floor($fightValue / 2) + 2;
+		$sheet->setParry($sheet->getParry() + $parry);
 	}
 
 	private function calculateModifier(Modifier $modifier, Sheet &$sheet)

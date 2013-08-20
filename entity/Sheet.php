@@ -21,8 +21,8 @@ class Sheet
 	private $skills;
 	private $attributes;
 	private $powers;
-	private $parry;
-	private $toughness;
+	private $parry = 0;
+	private $toughness = 0;
 	private $charisma = 0;
 	private $pace = 6;
 	private $powerPoints = 0;
