@@ -25,9 +25,12 @@ class HindranceRepository extends Repository
 
 		$hindrances = array();
 
+		$modifierRepository = new ModifierRepository();
+
 		for ($i = 0; $i < count($result); $i++) {
 			$res = $result[$i];
 			$hindrance = new Hindrance($res['id'], $res['name'], $res['description']);
+			$modifierRepository->bindModifiers($hindrance);
 			$hindrances[] = $hindrance;
 		}
 		return $hindrances;
@@ -52,6 +55,8 @@ class HindranceRepository extends Repository
 		$res = $result[0];
 
 		$hindrance = new Hindrance($res['id'], $res['name'], $res['description']);
+		$modifierRepository = new ModifierRepository();
+		$modifierRepository->bindModifiers($hindrance);
 
 		return $hindrance;
 	}

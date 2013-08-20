@@ -23,7 +23,9 @@ class AutoloadCsm
 			'./controller/',
 			'./entity/',
 			'./repository/',
+			'./entity/modifier/',
 			'./form/',
+			'./util/',
 			'./app/lib/',
 			'./app/util/'
 		);

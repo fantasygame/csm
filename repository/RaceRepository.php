@@ -50,9 +50,17 @@ class RaceRepository extends Repository
 		}
 		$res = $result[0];
 
-		$race = new Race($res['id'], $res['name']);
+		$race = new Race($id, $res['name']);
+
+		$modifierRepository = new ModifierRepository();
+		$modifierRepository->bindModifiers($race);
 
 		return $race;
+	}
+
+	private function getModifiers($id)
+	{
+		
 	}
 
 }

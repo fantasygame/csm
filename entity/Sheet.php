@@ -21,6 +21,12 @@ class Sheet
 	private $skills;
 	private $attributes;
 	private $powers;
+	private $parry;
+	private $toughness;
+	private $charisma = 0;
+	private $pace;
+	private $powerPoints = 0;
+	private $powerSlots = 0;
 
 	public function getAttribute($id)
 	{
@@ -220,6 +226,66 @@ class Sheet
 	public function setPowers($powers)
 	{
 		$this->powers = $powers;
+	}
+
+	public function getParry()
+	{
+		return $this->parry;
+	}
+
+	public function setParry($parry)
+	{
+		$this->parry = $parry;
+	}
+
+	public function getToughness()
+	{
+		return $this->toughness;
+	}
+
+	public function setToughness($toughness)
+	{
+		$this->toughness = $toughness;
+	}
+
+	public function getCharisma()
+	{
+		return $this->charisma;
+	}
+
+	public function setCharisma($charisma)
+	{
+		$this->charisma = $charisma;
+	}
+
+	public function getPace()
+	{
+		return $this->pace;
+	}
+
+	public function setPace($pace)
+	{
+		$this->pace = $pace;
+	}
+
+	public function getPowerPoints()
+	{
+		return $this->powerPoints;
+	}
+
+	public function setPowerPoints($powerPoints)
+	{
+		$this->powerPoints = $powerPoints;
+	}
+
+	public function getPowerSlots()
+	{
+		return $this->powerSlots;
+	}
+
+	public function setPowerSlots($powerSlots)
+	{
+		$this->powerSlots = $powerSlots;
 	}
 
 }

@@ -10,6 +10,7 @@ class Race
 
 	private $id;
 	private $name;
+	private $modifiers;
 
 	public function __construct($id, $name)
 	{
@@ -22,19 +23,19 @@ class Race
 		return $this->id;
 	}
 
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
 	public function getName()
 	{
 		return $this->name;
 	}
 
-	public function setName($name)
+	public function getModifiers()
 	{
-		$this->name = $name;
+		return $this->modifiers;
+	}
+
+	public function setModifiers($modifiers)
+	{
+		$this->modifiers = $modifiers;
 	}
 
 }

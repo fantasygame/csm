@@ -7,25 +7,21 @@
  */
 class Edge
 {
+
 	private $id;
 	private $name;
 	private $description;
-	
-	public function __construct($id, $name, $description)
+	private $modifiers;
+
+	public function __construct($id, $name)
 	{
-		$this-> id = $id;
-		$this-> name = $name;
-		$this-> description = $description;
+		$this->id = $id;
+		$this->name = $name;
 	}
-	
+
 	public function getId()
 	{
 		return $this->id;
-	}
-
-	public function setId($id)
-	{
-		$this->id = $id;
 	}
 
 	public function getName()
@@ -33,19 +29,29 @@ class Edge
 		return $this->name;
 	}
 
-	public function setName($name)
-	{
-		$this->name = $name;
-	}
-
 	public function getDescription()
 	{
 		return $this->description;
 	}
 
-	public function setDescription($description)
+	public function getModifiers()
 	{
-		$this->description = $description;
+		return $this->modifiers;
+	}
+
+	public function setModifiers($modifiers)
+	{
+		$this->modifiers = $modifiers;
+	}
+
+	public function getModifier($id)
+	{
+		for ($i = 0; $i < count($this->modifiers); $i++) {
+			if ($this->modifiers[$i]->getid() == $id) {
+				return $this->modifiers[$i];
+			}
+		}
+		return false;
 	}
 
 }

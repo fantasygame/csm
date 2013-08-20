@@ -62,6 +62,10 @@ class SheetController extends Controller
 	{
 		$sheetRepository = new SheetRepository();
 		$sheet = $sheetRepository->getById($id);
+		echo '<pre>';
+		print_r($sheet);
+		echo '</pre>';
+		exit();
 		$skillRepository = new BaseSkillRepository;
 		$baseSkills = $skillRepository->getAll('name');
 

@@ -28,9 +28,12 @@ class EdgeRepository extends Repository
 
 		$edges = array();
 
+		$modifierRepository = new ModifierRepository();
+
 		for ($i = 0; $i < count($result); $i++) {
 			$res = $result[$i];
 			$edge = new Edge($res['id'], $res['name'], $res['description']);
+			$modifierRepository->bindModifiers($edge);
 			$edges[] = $edge;
 		}
 
@@ -56,6 +59,8 @@ class EdgeRepository extends Repository
 		$res = $result[0];
 
 		$edge = new Edge($res['id'], $res['name'], $res['description']);
+		$modifierRepository = new ModifierRepository();
+		$modifierRepository->bindModifiers($edge);
 
 		return $edge;
 	}

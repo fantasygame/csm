@@ -128,12 +128,12 @@ class SheetRepository extends Repository
 		$sheet->setArchetype($result['archetype']);
 		$sheet->setDescription($result['description']);
 		$sheet->setExp($result['exp']);
+		
+		$raceRepository = new RaceRepository($this->db);
+		$sheet->setRace($raceRepository->getById($result['race_id']));
 
 		$userRepository = new UserRepository($this->db);
 		$sheet->setUser($userRepository->getById($result['user_id']));
-
-		$raceRepository = new RaceRepository($this->db);
-		$sheet->setRace($raceRepository->getById($result['race_id']));
 
 		$edgeRepository = new EdgeRepository($this->db);
 		$sheet->setEdges($edgeRepository->getForSheet($sheet));
@@ -150,6 +150,9 @@ class SheetRepository extends Repository
 		$skillRepository = new SkillRepository($this->db);
 		$sheet->setSkills($skillRepository->getForSheet($sheet));
 
+		$modifierCalculator = new ModifierCalculator();
+		$modifierCalculator->calculate($sheet);
+		
 		return $sheet;
 	}
 
