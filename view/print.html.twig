@@ -30,6 +30,9 @@
 	<div id="pace" class="handWrite">
 		{{ sheet.getPace() }}
 	</div>
+	<div id="runDie" class="handWrite">
+		( Bieg +k{{ sheet.getRunDie() }} )
+	</div>
 	<div id="charisma" class="handWrite">
 		{{ sheet.getCharisma() }}
 	</div>
@@ -49,7 +52,9 @@
 				{% for die in dice %}
 			<img src="/csm/resource/image/dice{% if skill.getValue() == die %}/checked{% endif %}/s{{ die }}.png"/>
 		{% endfor %}
-		<img src="/csm/resource/image/dice{% if skill.getValue() >= 12 %}/checked{% endif %}/s12.png"/>{% if skill.getValue() > 12 %}+{{skill.getValue() - 12}}{% endif %}
+		<img src="/csm/resource/image/dice{% if skill.getValue() >= 12 %}/checked{% endif %}/s12.png"/>{% if skill.getValue() > 12 %}+{{skill.getValue() - 12 + skill.getModifier()}}{% else %}
+		{% if skill.getModifier() > 0 %}+ {{ skill.getModifier() }} {% elseif skill.getModifier() < 0  %}{{ skill.getModifier() }}{% endif %}
+		{% endif %}
 			</div>
 		{% endif %}
 		{% endfor %}<br />
@@ -70,6 +75,11 @@
 	{% for power in sheet.getPowers() %}
 		{{ power.getName() }} <br />
 	{% endfor %}
+	</div>
+	<div id="bennies">
+		{% for i in 1..sheet.getBennies() %}
+			<img src="/csm/resource/image/benny.png" />
+		{% endfor %}
 	</div>
 </div>
 {% endblock %}

@@ -23,6 +23,11 @@ class SkillModifier extends NumberModifier
 		return $this->dice;
 	}
 
+	public function getSkillId()
+	{
+		return $this->skillId;
+	}
+
 }
 
 ?>

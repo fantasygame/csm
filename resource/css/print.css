@@ -56,6 +56,11 @@
 	font-size: 13px;
 }
 
+#runDie {
+	position: absolute; left: 93mm; top: 46.5mm;
+	font-size: 10px;
+}
+
 #parry {
 	position: absolute; left: 117mm; top: 60.5mm;
 	font-size: 13px;
@@ -108,3 +113,6 @@
 	line-height: 5.2mm;
 }
 
+#bennies {
+	position: absolute; left: 18mm; top: 289mm;
+}

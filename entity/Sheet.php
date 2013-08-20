@@ -33,6 +33,7 @@ class Sheet
 	private $bennies = 3;
 	private $initiativeCards = 1;
 	private $initiativeMinimum = 2;
+	private $startingMoney = 500;
 
 	public function getAttribute($id)
 	{
@@ -352,6 +353,16 @@ class Sheet
 	public function setInitiativeMinimum($initiativeMinimum)
 	{
 		$this->initiativeMinimum = $initiativeMinimum;
+	}
+
+	public function getStartingMoney()
+	{
+		return $this->startingMoney;
+	}
+
+	public function setStartingMoney($startingMoney)
+	{
+		$this->startingMoney = $startingMoney;
 	}
 
 }

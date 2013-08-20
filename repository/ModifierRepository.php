@@ -63,7 +63,7 @@ class ModifierRepository extends Repository
 		}
 		$r = $result[0];
 		if (!is_null($r['secondary'])) {
-			$modifier = new SecondaryModifier($id, $r['modifier'], $r['secondary']);
+			$modifier = new SecondaryModifier($id, $r['modifier'], $r['secondary'], $r['dice']);
 		} else if (!is_null($r['skill_id'])) {
 			$modifier = new SkillModifier($id, $r['modifier'], $r['skill_id'], $r['dice']);
 		} else if (!is_null($r['attribute_id'])) {

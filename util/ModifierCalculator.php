@@ -108,7 +108,11 @@ class ModifierCalculator
 			$secondary[0] = strtoupper($secondary);
 			$getter = "get$secondary";
 			$value = $sheet->$getter();
-			$value += $modifier->getModifier();
+			if ($modifier->getDice()) {
+				$value = $this->addDices($value, $modifier->getModifier());
+			} else {
+				$value += $modifier->getModifier();
+			}
 			$setter = "set$secondary";
 			$sheet->$setter($value);
 		} else {
@@ -118,11 +122,21 @@ class ModifierCalculator
 
 	private function addDices($value, $dices)
 	{
-		for ($i = 0; $i < $dices; $i++) {
-			if ($value < 12) {
-				$value += 2;
-			} else {
-				$value += 1;
+		if ($dices > 0) {
+			for ($i = 0; $i < $dices; $i++) {
+				if ($value < 12) {
+					$value += 2;
+				} else {
+					$value += 1;
+				}
+			}
+		} else {
+			for ($i = $dices; $i < 0; $i++) {
+				if ($value >= 6) {
+					$value -= 2;
+				} else {
+					break;
+				}
 			}
 		}
 		return $value;
