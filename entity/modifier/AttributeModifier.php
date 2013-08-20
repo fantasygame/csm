@@ -30,6 +30,11 @@ class AttributeModifier extends NumberModifier
 		return $this->starting;
 	}
 
+	public function getAttributeId()
+	{
+		return $this->attributeId;
+	}
+
 }
 
 ?>

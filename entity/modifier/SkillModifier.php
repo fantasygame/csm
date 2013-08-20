@@ -9,11 +9,13 @@ class SkillModifier extends NumberModifier
 {
 
 	private $dice;
+	private $skillId;
 
-	public function __construct($id, $modifier, $dice)
+	public function __construct($id, $modifier, $skillId, $dice)
 	{
 		parent::__construct($id, $modifier);
 		$this->dice = $dice;
+		$this->skillId = $skillId;
 	}
 
 	public function getDice()

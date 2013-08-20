@@ -11,12 +11,14 @@ class Edge
 	private $id;
 	private $name;
 	private $description;
+	private $fromModifier = false;
 	private $modifiers;
 
-	public function __construct($id, $name)
+	public function __construct($id, $name, $description)
 	{
 		$this->id = $id;
 		$this->name = $name;
+		$this->description = $description;
 	}
 
 	public function getId()
@@ -52,6 +54,16 @@ class Edge
 			}
 		}
 		return false;
+	}
+
+	public function getFromModifier()
+	{
+		return $this->fromModifier;
+	}
+
+	public function setFromModifier($fromModifier)
+	{
+		$this->fromModifier = $fromModifier;
 	}
 
 }

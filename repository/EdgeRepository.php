@@ -17,12 +17,14 @@ class EdgeRepository extends Repository
 	 * Get all the Edges !!!
 	 * @return array of Edges
 	 */
-	public function getAll()
+	public function getAll($avalible = true)
 	{
 		$query = "
 		SELECT * FROM `edge`
 		";
-
+		if ($avalible) {
+			$query .= " WHERE `avalible` = 1";
+		}
 		$handle = $this->db->query($query);
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
 

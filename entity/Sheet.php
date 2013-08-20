@@ -24,7 +24,7 @@ class Sheet
 	private $parry;
 	private $toughness;
 	private $charisma = 0;
-	private $pace;
+	private $pace = 6;
 	private $powerPoints = 0;
 	private $powerSlots = 0;
 

@@ -11,6 +11,7 @@ class Hindrance
 	private $id;
 	private $name;
 	private $description;
+	private $fromModifier = false;
 	private $modifiers;
 
 	public function __construct($id, $name, $description)
@@ -53,6 +54,16 @@ class Hindrance
 	public function setModifiers($modifiers)
 	{
 		$this->modifiers = $modifiers;
+	}
+
+	public function getFromModifier()
+	{
+		return $this->fromModifier;
+	}
+
+	public function setFromModifier($fromModifier)
+	{
+		$this->fromModifier = $fromModifier;
 	}
 
 }

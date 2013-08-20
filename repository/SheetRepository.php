@@ -128,7 +128,7 @@ class SheetRepository extends Repository
 		$sheet->setArchetype($result['archetype']);
 		$sheet->setDescription($result['description']);
 		$sheet->setExp($result['exp']);
-		
+
 		$raceRepository = new RaceRepository($this->db);
 		$sheet->setRace($raceRepository->getById($result['race_id']));
 
@@ -152,7 +152,6 @@ class SheetRepository extends Repository
 
 		$modifierCalculator = new ModifierCalculator();
 		$modifierCalculator->calculate($sheet);
-		
 		return $sheet;
 	}
 

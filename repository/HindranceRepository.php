@@ -13,13 +13,15 @@ class HindranceRepository extends Repository
 		parent::relations($sheet, $update, 'getHindrances', 'getForSheet');
 	}
 
-	public function getAll()
+	public function getAll($avalible = true)
 	{
 
 		$query = "
-			SELECT * FROM `hindrance`
-			";
-
+		SELECT * FROM `hindrance`
+		";
+		if ($avalible) {
+			$query .= " WHERE `avalible` = 1";
+		}
 		$handle = $this->db->query($query);
 		$result = $handle->fetchAll(Database::FETCH_ASSOC);
 

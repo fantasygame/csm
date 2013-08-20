@@ -16,6 +16,11 @@ class EdgeModifier extends Modifier
 		$this->edge = $edge;
 	}
 
+	public function getEdge()
+	{
+		return $this->edge;
+	}
+
 }
 
 ?>

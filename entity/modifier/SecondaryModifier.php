@@ -16,6 +16,11 @@ class SecondaryModifier extends NumberModifier
 		$this->secondary = $secondary;
 	}
 
+	public function getSecondary()
+	{
+		return $this->secondary;
+	}
+
 }
 
 ?>

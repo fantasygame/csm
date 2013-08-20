@@ -65,17 +65,19 @@ class ModifierRepository extends Repository
 		if (!is_null($r['secondary'])) {
 			$modifier = new SecondaryModifier($id, $r['modifier'], $r['secondary']);
 		} else if (!is_null($r['skill_id'])) {
-			$modifier = new SkillModifier($id, $r['modifier'], $r['dice']);
+			$modifier = new SkillModifier($id, $r['modifier'], $r['skill_id'], $r['dice']);
 		} else if (!is_null($r['attribute_id'])) {
 			$modifier = new AttributeModifier($id, $r['modifier'], $r['attribute_id'], $r['dice'], $r['attribute_starting']);
 		} else if (!is_null($r['edge_id'])) {
 			$edgeRepository = new EdgeRepository();
 			$edge = $edgeRepository->getById($r['edge_id']);
+			$edge->setFromModifier(true);
 			$this->bindModifiers($edge);
 			$modifier = new EdgeModifier($id, $edge);
 		} else if (!is_null($r['hindrance_id'])) {
 			$hindranceRepository = new HindranceRepository();
 			$hindrance = $hindranceRepository->getById($r['hindrance_id']);
+			$hindrance->setFromModifier(true);
 			$this->bindModifiers($hindrance);
 			$modifier = new HindranceModifier($id, $hindrance);
 		} else {
