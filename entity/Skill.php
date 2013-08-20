@@ -31,6 +31,16 @@ class Skill extends BaseSkill
 		$this->value = $value;
 	}
 
+	public function getBaseValue()
+	{
+		return $this->baseValue;
+	}
+
+	public function setBaseValue($baseValue)
+	{
+		$this->baseValue = $baseValue;
+	}
+
 	public function getAdd()
 	{
 		return $this->add;

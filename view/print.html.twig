@@ -21,6 +21,18 @@
 	<div id="exp" class="handWrite">
 		{{ sheet.getExp() }}
 	</div>
+	<div id="parry" class="handWrite">
+		{{ sheet.getParry() }}
+	</div>
+	<div id="toughness" class="handWrite">
+		{{ sheet.getToughness() }}
+	</div>
+	<div id="pace" class="handWrite">
+		{{ sheet.getPace() }}
+	</div>
+	<div id="charisma" class="handWrite">
+		{{ sheet.getCharisma() }}
+	</div>
 	<div id="attributes">
 	{% set dice = [4, 6, 8, 10] %}
 	{% for attribute in sheet.getAttributes() %}

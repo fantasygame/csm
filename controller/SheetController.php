@@ -80,7 +80,7 @@ class SheetController extends Controller
 		$sheet->setSkills($baseSkills);
 
 		$content = $this->getView()->render('print.html.twig', array('sheet' => $sheet));
-		return new Response(new Printer($content));
+		return new Response($content);
 	}
 
 	public function listAction()

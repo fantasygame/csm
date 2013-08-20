@@ -27,6 +27,12 @@ class Sheet
 	private $pace = 6;
 	private $powerPoints = 0;
 	private $powerSlots = 0;
+	private $runDie = 6;
+	private $startingAttributePoints = 5;
+	private $startingSkillPoints = 15;
+	private $bennies = 3;
+	private $initiativeCards = 1;
+	private $initiativeMinimum = 2;
 
 	public function getAttribute($id)
 	{
@@ -286,6 +292,66 @@ class Sheet
 	public function setPowerSlots($powerSlots)
 	{
 		$this->powerSlots = $powerSlots;
+	}
+
+	public function getRunDie()
+	{
+		return $this->runDie;
+	}
+
+	public function setRunDie($runDie)
+	{
+		$this->runDie = $runDie;
+	}
+
+	public function getStartingAttributePoints()
+	{
+		return $this->startingAttributePoints;
+	}
+
+	public function setStartingAttributePoints($startingAttributePoints)
+	{
+		$this->startingAttributePoints = $startingAttributePoints;
+	}
+
+	public function getStartingSkillPoints()
+	{
+		return $this->startingSkillPoints;
+	}
+
+	public function setStartingSkillPoints($startingSkillPoints)
+	{
+		$this->startingSkillPoints = $startingSkillPoints;
+	}
+
+	public function getBennies()
+	{
+		return $this->bennies;
+	}
+
+	public function setBennies($bennies)
+	{
+		$this->bennies = $bennies;
+	}
+
+	public function getInitiativeCards()
+	{
+		return $this->initiativeCards;
+	}
+
+	public function setInitiativeCards($initiativeCards)
+	{
+		$this->initiativeCards = $initiativeCards;
+	}
+
+	public function getInitiativeMinimum()
+	{
+		return $this->initiativeMinimum;
+	}
+
+	public function setInitiativeMinimum($initiativeMinimum)
+	{
+		$this->initiativeMinimum = $initiativeMinimum;
 	}
 
 }
