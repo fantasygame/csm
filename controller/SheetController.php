@@ -39,7 +39,7 @@ class SheetController extends Controller
 			$sheet = null;
 		}
 
-		$content = $this->getView()->render('form.tooltip.html.twig', array('attributes' => $attributes, 'skills' => $skills, 'edges' => $edges, 'hindrances' => $hindrances, 'powers' => $powers, 'races' => $races, 'users' => $users, 'sheet' => $sheet));
+		$content = $this->getView()->render('form.html.twig', array('attributes' => $attributes, 'skills' => $skills, 'edges' => $edges, 'hindrances' => $hindrances, 'powers' => $powers, 'races' => $races, 'users' => $users, 'sheet' => $sheet));
 		return new Response($content);
 	}
 
