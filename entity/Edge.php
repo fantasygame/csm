@@ -13,14 +13,16 @@ class Edge
 	private $requirements;
 	private $description;
 	private $fromModifier = false;
+	private $type;
 	private $modifiers;
 
-	public function __construct($id, $name, $requirements, $description)
+	public function __construct($id, $name, $requirements, $description, $type)
 	{
 		$this->id = $id;
 		$this->name = $name;
-		$this->description = $description;
 		$this->requirements = $requirements;
+		$this->description = $description;
+		$this->type = $type;
 	}
 
 	public function getId()
@@ -56,6 +58,16 @@ class Edge
 	public function setModifiers($modifiers)
 	{
 		$this->modifiers = $modifiers;
+	}
+
+	public function getType()
+	{
+		return $this->type;
+	}
+
+	public function setType($type)
+	{
+		$this->type = $type;
 	}
 
 	public function getModifier($id)

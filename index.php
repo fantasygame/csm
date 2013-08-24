@@ -24,6 +24,10 @@ try {
 	} else {
 		echo "<p>{$e->getMessage()}</p>";
 		echo "<p>{$e->getFile()}<br/>line {$e->getLine()}</p>";
+		echo '<pre>';
+		print_r($e->getTraceAsString());
+		echo '</pre>';
+		exit();
 	}
 }
 ?>
