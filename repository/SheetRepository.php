@@ -186,7 +186,12 @@ class SheetRepository extends Repository
 
 	public function remove($id)
 	{
-		//TODO
+		$query = "DELETE FROM `sheet` WHERE `id` = :id ";
+                
+                $handle = $this->db->prepare($query);
+		$handle->bindParam(':id', $id, Database::PARAM_INT);
+		$handle->execute();
+                
 	}
 
 	/**
