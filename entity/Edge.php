@@ -10,7 +10,7 @@ class Edge
 
 	private $id;
 	private $name;
-        private $requirements;
+	private $requirements;
 	private $description;
 	private $fromModifier = false;
 	private $modifiers;
@@ -20,7 +20,7 @@ class Edge
 		$this->id = $id;
 		$this->name = $name;
 		$this->description = $description;
-                $this->requirements = $requirements;
+		$this->requirements = $requirements;
 	}
 
 	public function getId()
@@ -32,15 +32,17 @@ class Edge
 	{
 		return $this->name;
 	}
-        public function getRequirements() {
-            return $this->requirements;
-        }
 
-        public function setRequirements($requirements) {
-            $this->requirements = $requirements;
-        }
+	public function getRequirements()
+	{
+		return $this->requirements;
+	}
 
-        
+	public function setRequirements($requirements)
+	{
+		$this->requirements = $requirements;
+	}
+
 	public function getDescription()
 	{
 		return $this->description;
