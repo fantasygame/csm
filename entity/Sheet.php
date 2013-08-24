@@ -185,9 +185,20 @@ class Sheet
 		$this->exp = $exp;
 	}
 
-	public function getEdges()
+	public function getEdges($type = '')
 	{
-		return $this->edges;
+		if (empty($type)) {
+			return $this->edges;
+		} else {
+			$edges = array();
+			for ($i = 0; $i < count($this->edges); $i++) {
+				$edge = $this->edges[$i];
+				if ($edge->getType() == $type) {
+					$edges[] = $edge;
+				}
+			}
+			return $edges;
+		}
 	}
 
 	public function setEdges($edges)

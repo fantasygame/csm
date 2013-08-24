@@ -10,15 +10,19 @@ class Edge
 
 	private $id;
 	private $name;
+	private $requirements;
 	private $description;
 	private $fromModifier = false;
+	private $type;
 	private $modifiers;
 
-	public function __construct($id, $name, $description)
+	public function __construct($id, $name, $requirements, $description, $type)
 	{
 		$this->id = $id;
 		$this->name = $name;
+		$this->requirements = $requirements;
 		$this->description = $description;
+		$this->type = $type;
 	}
 
 	public function getId()
@@ -29,6 +33,16 @@ class Edge
 	public function getName()
 	{
 		return $this->name;
+	}
+
+	public function getRequirements()
+	{
+		return $this->requirements;
+	}
+
+	public function setRequirements($requirements)
+	{
+		$this->requirements = $requirements;
 	}
 
 	public function getDescription()
@@ -44,6 +58,16 @@ class Edge
 	public function setModifiers($modifiers)
 	{
 		$this->modifiers = $modifiers;
+	}
+
+	public function getType()
+	{
+		return $this->type;
+	}
+
+	public function setType($type)
+	{
+		$this->type = $type;
 	}
 
 	public function getModifier($id)
