@@ -1,0 +1,108 @@
+@font-face {
+	font-family: "MarkerScript";
+	font-weight: normal;
+	font-style: normal;
+	src: url('/csm/resource/font/MarkerScript.ttf');
+}
+@font-face {
+  font-family: "Allura";
+  font-weight: normal;
+  font-style: normal;
+  src: url('/csm/resource/font/Allura-Regular.ttf');
+}
+
+#card {
+	background-image: url('/csm/resource/character_sheet/scroll.gif');
+	background-size: contain;
+	background-repeat: no-repeat;
+	font-family: inherit;
+	font-size: 12px;
+	max-width: 400mm;
+	height: 600mm;
+}
+
+.input {
+	width: 150mm;
+	background: transparent;
+	font-family: Allura;
+	font-size: 22px;
+	border-color: transparent;
+	border-bottom-color: burlywood;
+	border-bottom-style: ridge;
+}
+
+.option {
+	background: transparent;
+	font-family: Allura;
+	font-size: 20px;
+	border: navajowhite;
+}
+
+.attribute{
+	text-align: left;
+	font-family: Allura;
+	font-size: 20px;
+}
+
+.skill{
+	text-align: left;
+	font-family: Allura;
+	font-size: 18px;
+}
+
+#user {
+	position: absolute; left: 40mm; top:70mm;
+}
+
+#name {
+	position: absolute; left: 85mm; top:65mm;
+}
+
+#race {
+	position: absolute; left: 85mm; top:80mm;
+}
+
+#appearance {
+	position: absolute; left: 85mm; top:95mm;
+}
+
+#archetype {
+	position: absolute; left: 85mm; top:110mm;
+}
+
+#description {
+	position: absolute; left: 85mm; top:125mm;
+}
+
+#exp {
+	position: absolute; left: 120mm; top:78mm;
+}
+
+
+
+#attributes {
+	font-size: 15px;
+	position: absolute; left: 75mm; top: 170mm;
+}
+
+#edges {
+	position: absolute; left: 20mm; top: 248mm;
+	font-family: Allura;
+	font-size: 20px;
+}
+
+#hindrances {
+	position: absolute; left: 80mm; top: 248mm;
+	font-family: Allura;
+	font-size: 20px;
+}
+
+#powers {
+	position: absolute; left: 125mm; top: 248mm;
+	font-family: Allura;
+	font-size: 20px;
+}
+
+.submit{
+	position: fixed; float: right; bottom: 1%; right: 1%;
+}
