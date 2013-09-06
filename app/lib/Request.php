@@ -16,6 +16,8 @@ class Request
 	public function __construct()
 	{
 		$this->setUrl();
+		$this->post = $_POST;
+		$this->cookie = $_COOKIE;
 	}
 
 	private function setUrl()
@@ -31,9 +33,6 @@ class Request
 		$url = explode('/', $url);
 		$this->url = $url;
 		unset($_GET['url']);
-
-		$this->post = $_POST;
-		$this->cookie = $_COOKIE;
 	}
 
 	public function getUrl()

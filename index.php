@@ -8,7 +8,32 @@ try {
 	exit($e->getMessage());
 }
 
+//// phpbb3 needs junk global variables
+//$phpbb3 = new PHPBB3Integrator();
+//$userId = $phpbb3->getUserId();
+//unset($GLOBALS, $phpbb_root_path, $phpEx, $user, $db, $config, $cache, $template, $auth, $phpbb_hook);
 $config = SimpleConfig::getInstance();
+//require './entity/User.php';
+//
+//$vars = get_defined_vars();
+//echo '<pre>';
+//print_r(get_declared_classes());
+//
+//print_r($vars);
+//echo '</pre>';
+//echo '<pre>';
+//print_r($userId);
+//echo '</pre>';
+//exit();
+//
+//$userId = 1;
+////
+//$loginSystem = new LoginSystem();
+//try {
+//	$loginSystem->login($userId);
+//} catch (Exception $e) {
+//	exit($e->getMessage());
+//}
 
 $request = new Request();
 $config['request'] = $request;

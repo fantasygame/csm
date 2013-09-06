@@ -24,9 +24,6 @@ class Application
 		if (!is_file('app/config/config.php')) {
 			throw new Exception('Copy config.dist.php to config.php and personalize content of config.php');
 		}
-		if (!in_array('mod_rewrite', apache_get_modules())) {
-			throw new Exception('Enable mod rewrite in xampp <a target="_blank" href="http://www.leonardaustin.com/technical/enable-mod_rewrite-in-xampp">How?</a>');
-		}
 	}
 
 	private function autoLoaders()

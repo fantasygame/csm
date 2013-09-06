@@ -4,6 +4,9 @@
 
 $config = array();
 
+// PHPBB3
+$config['phpbb3']['root_path'] = '../forum';
+
 // application directories
 $config['controller_dir'] = 'controller';
 $config['model_dir'] = 'model';
