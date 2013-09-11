@@ -113,7 +113,7 @@ abstract class Repository
 			}
 			$query = "$query1$query2);";
 		}
-		
+
 		$handle = $this->db->prepare($query);
 		$obj1Id = $object1->getId();
 		$handle->bindParam(":$name1", $obj1Id, Database::PARAM_INT);

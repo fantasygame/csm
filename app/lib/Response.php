@@ -17,7 +17,7 @@ class Response
 
 	public function resolve()
 	{
-		if (is_string($this->content)) {
+		if (!is_object($this->content)) {
 			echo $this->content;
 		} else if (get_class($this->content) == 'Redirect') {
 			$this->content->go();

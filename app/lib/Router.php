@@ -32,7 +32,7 @@ class Router
 
 		$controller = new $route['controller']();
 
-		if (!isset($url[1])) {
+		if (!isset($url[1]) || in_array($url[1], array('index.php', 'index.html', 'index.htm'))) {
 			if (!isset($route['defaultAction'])) {
 				throw new Exception('No default action specified');
 			} else {
@@ -76,7 +76,6 @@ class Router
 		}
 
 		return $reflection->invokeArgs($controller, $parameters);
-		
 	}
 
 }

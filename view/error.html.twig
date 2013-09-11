@@ -1,0 +1,14 @@
+{% extends "main.html.twig" %}
+
+{% block body %}
+<div style="background-color: #FFCCCC; padding: 10px;">
+	<p>{{ exception.getMessage() }}</p>
+</div>
+{% if environment == 'development' %}
+<div style="background-color: #eceadf; padding: 10px; text-align: left;">
+	<p>{{ exception.getMessage() }}</p>
+	<p>{{ exception.getFile() }} : line {{ exception.getLine() }}</p>
+	<p style="text-align: left;"><pre>{{ exception.getTraceAsString() }}</pre></p>
+</div>
+{% endif %}	
+{% endblock %}

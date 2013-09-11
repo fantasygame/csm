@@ -7,8 +7,9 @@
  */
 class View
 {
+
 	private $engine;
-	
+
 	public function __construct()
 	{
 		$config = SimpleConfig::getInstance();

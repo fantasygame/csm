@@ -24,7 +24,7 @@ class Database extends PDO
 			Database::MYSQL_ATTR_INIT_COMMAND => 'set names utf8'
 		);
 		$dsn = "$engine:host=$host";
-		if(!is_null($database)) {
+		if (!is_null($database)) {
 			$dsn .= ";dbname=$database";
 		}
 		parent::__construct($dsn, $user, $password, $options);

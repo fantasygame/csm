@@ -85,7 +85,7 @@ class SheetController extends Controller
 
 	public function listAction()
 	{
-		$config = SimpleConfig::getInstance();
+//		$config = SimpleConfig::getInstance();
 //		$user = $config['logged_user'];
 //		echo '<pre>';
 //		print_r($user);

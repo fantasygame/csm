@@ -12,12 +12,14 @@ class Request
 	private $urlString;
 	private $post;
 	private $cookie;
+	private $files;
 
 	public function __construct()
 	{
 		$this->setUrl();
 		$this->post = $_POST;
 		$this->cookie = $_COOKIE;
+		$this->files = $_FILES;
 	}
 
 	private function setUrl()
@@ -58,6 +60,11 @@ class Request
 	public function getCookie()
 	{
 		return $this->cookie;
+	}
+
+	public function getFiles()
+	{
+		return $this->files;
 	}
 
 }
